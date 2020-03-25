@@ -1104,13 +1104,20 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
   
   ## Mittelwerte der DIfferenzscores berechnen
   diffscores[,.(Mittelwert_Differenzscore_Valenz = round(mean(DIFF_VAL,na.rm = TRUE),2), Mittelwert_Differenzscore_Arousal = round(mean(DIFF_ARO,na.rm = TRUE),2)), keyby = EXC_NR]</code></pre>
-<pre><code>##    EXC_NR Mittelwert_Differenzscore_Valenz Mittelwert_Differenzscore_Arousal
-## 1:      1                               26                               -50
-## 2:      2                               -5                                39
-## 3:      3                              -42                                39
-## 4:      4                              -25                                39
-## 5:      5                              -36                                57
-## 6:      6                              -35                                32</code></pre>
+<pre><code>##    EXC_NR Mittelwert_Differenzscore_Valenz
+## 1:      1                               26
+## 2:      2                               -5
+## 3:      3                              -42
+## 4:      4                              -25
+## 5:      5                              -36
+## 6:      6                              -35
+##    Mittelwert_Differenzscore_Arousal
+## 1:                               -50
+## 2:                                39
+## 3:                                39
+## 4:                                39
+## 5:                                57
+## 6:                                32</code></pre>
 <pre class="r"><code>  ## Visualisierung Differenzscores pro Uebung
   # Daten fuer ggplot ins Long-format bringen
   diffscores_long &lt;- melt(diffscores,id.vars= c(&quot;EXC_NR&quot;, &quot;PID&quot;), measure.vars=c(&quot;DIFF_VAL&quot;, &quot;DIFF_ARO&quot;))
