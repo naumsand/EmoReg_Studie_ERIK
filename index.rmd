@@ -1,0 +1,21 @@
+---
+title: "General information"
+output: 
+  html_document:
+    css: styles.css
+    code_folding: hide
+---
+
+```{r setup, include=FALSE, message = FALSE, warning = FALSE}
+
+# Set general settings for Markdown file 
+  knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+
+# Swipe environment
+  rm(list=ls())
+  
+
+```
+
+Test

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Screening</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EmoReg-Studie ERIK</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="glyphicon glyphicon-info-sign"></span>
+     
+    Dateninfo
+  </a>
+</li>
+<li>
+  <a href="Screening.html">
+    <span class="glyphicon glyphicon-wrench"></span>
+     
+    Screening
+  </a>
+</li>
+<li>
+  <a href="Eltern_Kind_Befragung_Roboter_Interaktion.html">
+    <span class="glyphicon glyphicon-hand-up"></span>
+     
+    Roboter-Kind-Interaktion
+  </a>
+</li>
+<li>
+  <a href="Puls_2.html">
+    <span class="glyphicon glyphicon-user"></span>
+     
+    Mini-Puls-Studie
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Screening</h1>
+
+</div>
+
+
+<div id="vorbereitung" class="section level1">
+<h1>Vorbereitung</h1>
+<div id="einstellungen" class="section level2">
+<h2>Einstellungen</h2>
+<pre class="r"><code>  # Benoetigte Packages laden und installieren
+  #install.packages(&quot;lubridate&quot;)
+  #install.packages(&quot;data.table&quot;)
+  #install.packages(&quot;dplyr&quot;)
+  #install.packages(&quot;ggplot2&quot;)
+  #install.packages(&quot;corrplot&quot;)
+  #install.packages(&quot;ggstatsplot&quot;)
+  #install.packages(&quot;rlang&quot;)
+  library(data.table)
+  library(lubridate)
+  library(dplyr)
+  library(ggplot2)
+  library(corrplot)
+  library(ggstatsplot)
+  library(rlang)</code></pre>
+</div>
+<div id="daten-importieren" class="section level2">
+<h2>Daten importieren</h2>
+<p>Die Datensets von dem Fragebogen Screening werden geladen.</p>
+<pre class="r"><code>  screening &lt;- read.csv(&quot;Screening.csv&quot;, sep=&quot;;&quot;, colClasses = c(STARTED = &quot;POSIXct&quot;,LASTDATA = &quot;POSIXct&quot;,SD01_01 = &quot;character&quot;))
+  # Die Variable SD01_01(Geburtsdatum) wird nicht als Datum erkannt, daher importieren wir sie zunaechst als Character und wandeln sie spaeter um.</code></pre>
+</div>
+<div id="daten-organisieren" class="section level2">
+<h2>Daten organisieren</h2>
+<pre class="r"><code>  ## Daten filtern nach beendeten Durchgaengen
+  # fuer die Verwendung von data.table sicherstellen, dass screening data.table
+  screening &lt;- as.data.table(screening)
+  # Anzahl Datenreihen/Teilnehmer
+  screening[,.N]
+  # Anzahl beendete Frageboegen
+  screening[FINISHED == 1,.N]
+  # nur beendete Frageboegen verwenden
+  screening &lt;- screening[FINISHED == 1]
+  # nur Frageboegen mit ID-Angabe verwenden
+  screening &lt;- screening[ID01_01|ID01_02|ID01_03|ID01_04 != NA]
+  
+  ## Weitere fehlende Werte?
+  any(is.na(screening))</code></pre>
+<p>Der Screeningfragebogen wurde f&amp;uumlr 6 Kinder ausgef&amp;uumlllt, davon sind 6 Frageb&amp;oumlgen vollst&amp;aumlndig. Nur diese Frageb&amp;oumlgen werden in die Analyse einbezogen.</p>
+</div>
+</div>
+<div id="demographische-daten" class="section level1">
+<h1>Demographische Daten</h1>
+<pre class="r"><code>  ## Geschlecht(Variable SD02), 1 = maennlich 2 = weiblich 3 = k.A.
+
+  screening$SD02[screening$SD02==1] = &quot;maennlich&quot;
+  screening$SD02[screening$SD02==2] = &quot;weiblich&quot;
+  screening$SD02[screening$SD02==3] = &quot;k.A.&quot;
+
+  table(screening$SD02)
+  
+  ## Alter (Variable SD01_01)
+  screening[,SD01_01 := as.POSIXct(SD01_01,format = &quot;%Y-%m-%d&quot;)]
+  screening[,age_in_years := round(interval(start = SD01_01, end = LASTDATA) /
+                                     duration(num = 1, units = &quot;years&quot;),1)]
+  # Altersdurchschnitt
+  screening[,round(mean(age_in_years,na.rm = TRUE),1)]
+  # Standardabweichung
+  screening[,round(sd(age_in_years, na.rm = TRUE),2)]
+  # Altersspanne
+  screening[,range(age_in_years, na.rm = TRUE)]</code></pre>
+<p>Der Altersdurchschnitt ist 8.8 (<em>SD</em> = 0.64). Die Altersspanne betr&amp;oumlgt 8.2 – 9.4 Jahre.</p>
+</div>
+<div id="erc" class="section level1">
+<h1>ERC</h1>
+<div id="erc-subskalen" class="section level2">
+<h2>ERC Subskalen</h2>
+<pre class="r"><code>  ## data.table &quot;traits&quot; fuer Testscores erstellen
+  # Fuer Testdatenset IDs zu PID zusammenfuegen (spaetere Teilnehmer haben alle eine PID)
+  screening &lt;- screening[,PID := .(paste(ID01_01, ID01_02,ID01_03,ID01_04, sep = &quot;&quot;))]
+  traits &lt;- screening[,.(PID,SD02,age_in_years)]
+
+  ## Keine Invertierung mehr notwendig: Items mit reverse scoring(4,5,9,11,16,18) werden bereits in SoSciSurvey invertiert.
+
+  ## Lability/Negativity (Items: 2,4,5,6,8,9,10,11,13,14,17,19,20,22,24)
+  traits[,ERC_LN := rowSums(screening[,.(ER01_02,ER01_04,ER01_05,ER01_06,ER01_08, ER01_09, ER01_10,
+                                          ER01_11,ER01_13, ER01_14, ER01_17, ER01_19, ER01_20, ER01_22,
+                                          ER01_24)])]
+  
+  ## Emotion Regulation (Items: 1,3,7,15,16,18,21,23)
+  traits[,ERC_EmoReg := rowSums(screening[,.(ER01_01,ER01_03,ER01_07,ER01_15,ER01_16, ER01_18, ER01_21,
+                                         ER01_23)])]</code></pre>
+</div>
+<div id="erc-visualisierung" class="section level2">
+<h2>ERC Visualisierung</h2>
+<pre class="r"><code>  ## Histogramme
+  ERC_LN_hist &lt;- ggplot(data=traits, aes(traits$ERC_LN)) + 
+    geom_histogram() +
+    labs( title = &quot;Histogramm&quot;, x = &quot; Summenwert&quot;, y = &quot;&quot;)
+  ERC_EmoReg_hist &lt;- ggplot(data=traits, aes(traits$ERC_EmoReg)) + 
+    geom_histogram() +
+    labs( title = &quot;Histogramm&quot;, x = &quot;Summenwert&quot;, y = &quot;&quot;)
+  ## Dotplot
+  ERC_LN_dot &lt;- ggplot(data=traits, aes(traits$ERC_LN)) + 
+    geom_dotplot() +
+    labs( title = &quot;Dotplot&quot;, x = &quot; Summenwert&quot;, y = &quot;&quot;) +
+    scale_y_discrete(labels = &quot;&quot;)
+  ERC_EmoReg_dot &lt;- ggplot(data=traits, aes(traits$ERC_EmoReg)) + 
+    geom_dotplot() +
+    labs( title = &quot;Dotplot&quot;, x = &quot;Summenwert&quot;, y = &quot;&quot;) +
+    scale_y_discrete(labels = &quot;&quot;)
+  
+  ## Plots fuer Lability/Negativity bzw. Emotion Regulation nebeneinander anzeigen
+  # Plots fuer Lability/Negativity
+  combine_plots(ERC_LN_hist, ERC_LN_dot,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                                title.text = &quot;ERC Lability/Negativity&quot;,
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Screening_files/figure-html/ERC_Visualsierung-1.png" width="672" /></p>
+<pre class="r"><code>  # Plots fuer Emotion Regulation
+  combine_plots(ERC_EmoReg_hist, ERC_EmoReg_dot,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                                title.text = &quot;ERC Emotion Regulation&quot;,
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Screening_files/figure-html/ERC_Visualsierung-2.png" width="672" /></p>
+</div>
+</div>
+<div id="hipic" class="section level1">
+<h1>HiPic</h1>
+<div id="hipic-facetten" class="section level2">
+<h2>HiPic Facetten</h2>
+<pre class="r"><code>  ## Items fuer Berechnung der Facetten invertieren (FACETKEY:13,15,16,17,23,26,31,37)
+  Hipic_Facetkey &lt;- screening[,which(names(screening)==&#39;HP01_01&#39;):which(names(screening)==&#39;HP01_40&#39;)]
+  facet_itemsreverse &lt;- c(&quot;HP01_13&quot;,&quot;HP01_15&quot;, &quot;HP01_16&quot;, &quot;HP01_17&quot;, &quot;HP01_23&quot;, &quot;HP01_26&quot;, &quot;HP01_31&quot;, &quot;HP01_37&quot;)
+  Hipic_Facetkey &lt;- Hipic_Facetkey %&gt;%
+    mutate_at(facet_itemsreverse, list(~ recode(.,&quot;1&quot;=5, &quot;2&quot; = 4, &quot;3&quot; = 3, &quot;4&quot; = 2, &quot;5&quot;=1)))
+  
+  ## Summenwerte pro Facette berechnen und dem Dataframe &quot;traits&quot; hinzufuegen
+  # 1. Altruismus/Altruism (B_ALT) (8 Items)
+  traits[,HiPic_B_ALT := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_01&#39;):which(names(Hipic_Facetkey)==&#39;HP01_08&#39;))])]
+  # 2. Entgegenkommen/Compliance (B_COM) (8 Items)
+  traits[,HiPic_B_COM := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_09&#39;):which(names(Hipic_Facetkey)==&#39;HP01_16&#39;))])]
+  # 3. Dominanz/Dominance (B_DOM) (8 Items)
+  traits[,HiPic_B_DOM := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_17&#39;):which(names(Hipic_Facetkey)==&#39;HP01_24&#39;))])]
+  # 4. Egozentrismus/Egocentrism (B_EGO) (8 Items)
+  traits[,HiPic_B_EGO := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_25&#39;):which(names(Hipic_Facetkey)==&#39;HP01_32&#39;))])]
+  # 5. Reizbarkeit/Irritability (B_IRR) (8 Items)
+  traits[,HiPic_B_IRR := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_33&#39;):which(names(Hipic_Facetkey)==&#39;HP01_40&#39;))])]</code></pre>
+</div>
+<div id="hipic-gesamtwert-benevolance" class="section level2">
+<h2>HiPic Gesamtwert Benevolance</h2>
+<pre class="r"><code>  ## Items fuer die Berechnung invertieren (DIMENSIONKEY:13,15,16,18-22,24,25,27-30,32-36,38-40)
+  Hipic_Dimensionkey &lt;- screening[,which(names(screening)==&#39;HP01_01&#39;):which(names(screening)==&#39;HP01_40&#39;)]
+  dimension_itemsreverse &lt;- c(&quot;HP01_13&quot;,&quot;HP01_15&quot;, &quot;HP01_16&quot;, &quot;HP01_18&quot;, &quot;HP01_19&quot;, &quot;HP01_20&quot;, &quot;HP01_21&quot;, &quot;HP01_22&quot;,
+                                   &quot;HP01_24&quot;,&quot;HP01_25&quot;, &quot;HP01_27&quot;, &quot;HP01_28&quot;, &quot;HP01_29&quot;, &quot;HP01_30&quot;, &quot;HP01_32&quot;, &quot;HP01_33&quot;,
+                                   &quot;HP01_34&quot;,&quot;HP01_35&quot;, &quot;HP01_38&quot;, &quot;HP01_39&quot;, &quot;HP01_40&quot;)
+  Hipic_Dimensionkey &lt;- Hipic_Dimensionkey %&gt;%
+  mutate_at(dimension_itemsreverse,list(~ recode(.,&quot;1&quot;=5, &quot;2&quot; = 4, &quot;3&quot; = 3, &quot;4&quot; = 2, &quot;5&quot;=1)))
+  
+  ## Gesamtwert Gutmuetigekeit/Benevolance berechnen
+  traits[,HiPic_Benevolance := rowSums(Hipic_Dimensionkey[,which(names(Hipic_Dimensionkey)==&#39;HP01_01&#39;):which(names(Hipic_Dimensionkey)==&#39;HP01_40&#39;)])]</code></pre>
+</div>
+<div id="hipic-visualisierung" class="section level2">
+<h2>HiPic Visualisierung</h2>
+<pre class="r"><code>  ## Moeglichkeit 1: Ein Density-plot fuer alle Subskalen und ein Density-Plot fuer die Gesamtskala (Ein Density-plot eignet sich besser als ein Histogramm, da die Verteilungen fuer die einzelnen Skalen beim ueberinanderlegen besser zu erkennen sind )
+  # Umwandlung von traits ins Long-format
+  traits_long_H &lt;- melt(traits,id.vars=&quot;PID&quot;,measure.vars=c(&quot;HiPic_B_ALT&quot;,&quot;HiPic_B_COM&quot;,&quot;HiPic_B_DOM&quot;,&quot;HiPic_B_EGO&quot;,&quot;HiPic_B_IRR&quot;))
+
+  # Density-plot Subskalen
+  HiPic_sub &lt;- ggplot(data = traits_long_H, aes(x = value, fill = variable)) + 
+    geom_density(alpha = 0.55) +
+    labs( title = &quot;HiPic Subskalen&quot;, x = &quot;Summenwert&quot;) +
+    scale_fill_discrete(labels = c(&quot;HiPic_B_ALT&quot; = &quot;Altruismus&quot;, &quot;HiPic_B_COM&quot; = &quot;Compliance&quot;,&quot;HiPic_B_DOM&quot; = &quot;Dominanz&quot;,&quot;HiPic_B_EGO&quot; = &quot;Egoismus&quot;,&quot;HiPic_B_IRR&quot; = &quot;Reizbarkeit&quot;) ) +
+    theme_bw() +
+    theme(legend.position = &quot;bottom&quot;, legend.title = element_blank()) +
+    guides(fill = guide_legend(nrow = 3, ncol = 2))
+  
+  # Density-plot Gesamtwert
+  HiPic_ges &lt;- ggplot(data = traits, aes(x = HiPic_Benevolance)) + 
+    geom_density() +
+    labs( title = &quot;HiPic Gesamtwert&quot;, x = &quot;Gesamtwert&quot;) +
+    theme_bw()
+  
+  # Beide Plots kombinieren
+  combine_plots(HiPic_sub, HiPic_ges, ncol = 2, nrow=1,labels = c(&quot;A&quot;, &quot;B&quot;), caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Screening_files/figure-html/HiPic_Visualisierung-1.png" width="672" /></p>
+<pre class="r"><code>  ## Moeglichkeit 2: pro Skala ein Plot
+  # Umwandlung von traits ins Long-format
+  traits_long_H2 &lt;- melt(traits,id.vars=&quot;PID&quot;,measure.vars=c(&quot;HiPic_B_ALT&quot;,&quot;HiPic_B_COM&quot;,&quot;HiPic_B_DOM&quot;,&quot;HiPic_B_EGO&quot;,&quot;HiPic_B_IRR&quot;, &quot;HiPic_Benevolance&quot;))
+  
+  # Plot erstellen
+  ggplot (data = traits_long_H2, aes(x = value)) +
+    geom_histogram() +
+    facet_wrap(~variable, scale = &quot;free&quot;, labeller = as_labeller(c(&quot;HiPic_B_ALT&quot;=&quot;Altruismus&quot;, &quot;HiPic_B_COM&quot; = &quot;Compliance&quot;,&quot;HiPic_B_DOM&quot; = &quot;Dominanz&quot;,&quot;HiPic_B_EGO&quot; = &quot;Egoismus&quot;,&quot;HiPic_B_IRR&quot; = &quot;Reizbarkeit&quot;, &quot;HiPic_Benevolance&quot; = &quot;Gesamtwert&quot;))) +
+    labs(title = &quot;HiPic&quot;, x = NULL, y = NULL) +
+    theme_bw()</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Screening_files/figure-html/HiPic_Visualisierung-2.png" width="672" /></p>
+</div>
+</div>
+<div id="srs" class="section level1">
+<h1>SRS</h1>
+<div id="srs-subskalen" class="section level2">
+<h2>SRS Subskalen</h2>
+<pre class="r"><code>  ## Summenwert pro Subskala berechnen
+  #1. Soziale Bewusstheit (SRS_SB) Items: 2,7,25,32,45,52,54,56
+  traits[,SRS_SB := rowSums(screening[,c(&quot;A401_02&quot;,&quot;A401_07&quot;, &quot;A402_05&quot;, &quot;A402_12&quot;, &quot;A403_05&quot;,&quot;A403_12&quot;, &quot;A403_14&quot;, &quot;A403_16&quot;)])]
+  #2. Soziale Kognition (SRS_SK) Items: 5,10,15,17,30,40,42,44,48,58,59,62
+  traits[,SRS_SK := rowSums(screening[,c(&quot;A401_05&quot;,&quot;A401_10&quot;, &quot;A401_15&quot;, &quot;A401_17&quot;, &quot;A402_10&quot;,&quot;A402_20&quot;, &quot;A403_02&quot;, &quot;A403_04&quot;,
+                                        &quot;A403_08&quot;, &quot;A403_18&quot;,&quot;A403_19&quot;, &quot;A403_22&quot;)])]
+  #3. Soziale Kommunikation (SRS_SKO) Items: 12,13,16,18,19,21,26,33,35,36,37,38,41,46,47,51,53,55,57,60,61
+  traits[,SRS_SKO := rowSums(screening[,c(&quot;A401_12&quot;,&quot;A401_13&quot;,&quot;A401_16&quot;,&quot;A401_18&quot;,&quot;A401_19&quot;,&quot;A402_01&quot;,&quot;A402_02&quot;,&quot;A402_06&quot;,&quot;A402_13&quot;,&quot;A402_15&quot;,
+  &quot;A402_16&quot;,&quot;A402_17&quot;,&quot;A402_18&quot;,&quot;A403_01&quot;,&quot;A403_06&quot;,&quot;A403_07&quot;,&quot;A403_11&quot;,&quot;A403_13&quot;,&quot;A403_15&quot;,&quot;A403_17&quot;,&quot;A403_20&quot;,&quot;A403_21&quot;)])]
+  #4. Soziale Motivation (SRS_SM) Items: 1,3,6,9,11,23,27,34,43,64,65
+  traits[,SRS_SM := rowSums(screening[,c(&quot;A401_01&quot;,&quot;A401_03&quot;,&quot;A401_06&quot;,&quot;A401_09&quot;,&quot;A401_11&quot;,&quot;A402_03&quot;,&quot;A402_07&quot;,&quot;A402_14&quot;,&quot;A403_03&quot;,&quot;A403_24&quot;,
+                                        &quot;A403_25&quot;)])]
+  #5. Autistische Manierismen (SRS_AM) Items: 4,8,14,20,24,28,29,31,39,49,50,63
+  traits[,SRS_AM :=rowSums(screening[,c(&quot;A401_04&quot;,&quot;A401_08&quot;,&quot;A401_14&quot;,&quot;A401_20&quot;,&quot;A402_04&quot;,&quot;A402_08&quot;,&quot;A402_09&quot;,&quot;A402_11&quot;,&quot;A402_19&quot;,&quot;A403_09&quot;,&quot;A403_10&quot;,
+                                        &quot;A403_23&quot;)])]</code></pre>
+</div>
+<div id="srs-gesamtrohwert" class="section level2">
+<h2>SRS Gesamtrohwert</h2>
+<pre class="r"><code>  traits[,SRS_Gesamt := rowSums(screening[,which(names(screening)==&#39;A401_01&#39;):which(names(screening)==&#39;A403_25&#39;)])]</code></pre>
+</div>
+<div id="srs-visualisierung-gesamtwert" class="section level2">
+<h2>SRS Visualisierung Gesamtwert</h2>
+<pre class="r"><code>  ## Einzelne Plots erstellen
+  SRS_Gesamt_hist &lt;- ggplot(data=traits, aes(traits$SRS_Gesamt)) + 
+    geom_histogram() +
+    labs( title = &quot;Histogramm SRS Gesamt&quot;, x = &quot;Gesamtscore&quot;, y = &quot;&quot;) 
+  SRS_Gesamt_dot &lt;- ggplot(data=traits, aes(traits$SRS_Gesamt)) + 
+    geom_dotplot() +
+    labs(title = &quot;Dotplot SRS Gesamt&quot;, x = &quot;Gesamtscore&quot;, y = &quot;&quot;) +
+    scale_y_discrete(labels = &quot;&quot;) # y-Achse sagt nicht aus, daher blenden wir sie aus
+  
+  ## Plots kombinieren
+   combine_plots(SRS_Gesamt_hist, SRS_Gesamt_dot,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Screening_files/figure-html/SRS_visualisierung-1.png" width="672" /></p>
+</div>
+</div>
+<div id="traits---visualisierung-mit-corr.plot" class="section level1">
+<h1>traits - Visualisierung mit corr.plot</h1>
+<pre class="r"><code>  ## Erstellen der Korrelationsmatrix
+  Cor_traits &lt;- cor(traits[,which(names(traits)==&#39;ERC_LN&#39;):which(names(traits)==&#39;SRS_Gesamt&#39;)], use = &quot;complete.obs&quot;)
+
+  ## Visualisierung 
+  # naeher spezifiziert: Schriftgroeße und Farbe der Variablennamen
+  traitplot &lt;- corrplot(Cor_traits, type = &quot;upper&quot;, tl.cex = 0.9, tl.col = &quot;black&quot;)</code></pre>
+<p><img src="Screening_files/figure-html/traits_Visualisierung-1.png" width="672" /></p>
+</div>
+<div id="speichern-relevanter-objekte" class="section level1">
+<h1>Speichern relevanter Objekte</h1>
+<pre class="r"><code>  saveRDS(traits,&quot;Traits_screening&quot;)
+  saveRDS(traits,&quot;Traits_plot&quot;)</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

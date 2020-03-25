@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Ergebnisse der Emotionsregulationsstudie</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EmoReg-Studie ERIK</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="glyphicon glyphicon-info-sign"></span>
+     
+    Uebersicht
+  </a>
+</li>
+<li>
+  <a href="Screening.html">
+    <span class="glyphicon glyphicon-wrench"></span>
+     
+    Screening
+  </a>
+</li>
+<li>
+  <a href="Eltern_Kind_Befragung_Roboter_Interaktion.html">
+    <span class="glyphicon glyphicon-hand-up"></span>
+     
+    Roboter-Kind-Interaktion
+  </a>
+</li>
+<li>
+  <a href="Puls_2.html">
+    <span class="glyphicon glyphicon-user"></span>
+     
+    Mini-Puls-Studie
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Ergebnisse der Emotionsregulationsstudie</h1>
+
+</div>
+
+
+<hr />
+<div id="vorbereitung" class="section level3">
+<h3>Vorbereitung</h3>
+<p>Zunächst werden die Datensets “Kinder_full”, “Eltern_full” und “Eltern_Uebung” geladen und überprüft, wie viele Probanden gemessen wurden und wie die Verteilung auf die Gruppen (Avatar vs Roboter) aussieht.</p>
+<pre class="r"><code># Importiere CSV Datei mit UTF-8 encoding, Spaltentrenner ; und Dezimalzeichen ,
+ds = read.csv(&quot;Eltern_Kids_full_uebung.csv&quot;, encoding = &quot;UTF-8&quot;,header = TRUE,sep = &quot;;&quot;,dec = &quot;,&quot;,
+    row.names = &quot;CASE&quot;,as.is = TRUE,check.names = TRUE, fill = TRUE, strip.white = TRUE)
+
+# Lade Screening Datenset fuer Information zu Alter / Geschlecht
+screen = readRDS(&quot;Traits_screening&quot;, refhook = NULL)
+
+# Fuege das Screening-Datenset dem ds-Datenset hinzu
+ds &lt;- merge(ds,screen, all = T)
+
+# Frageboegen getrennt auswerten
+# Eltern_uebung
+ds_uebung = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Eltern_Uebung&#39;)
+ds_uebung &lt;- as.data.table(ds_uebung)
+ds_uebung[,EXC_NR := as.factor(EXC_NR)]
+# Zunaechst nur die Daten der ID &quot;testtest&quot; verwenden
+ds_uebung &lt;- ds_uebung[PID == &quot;testtest&quot;,]
+
+# Eltern_full, kids_full
+ds = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Eltern_full&#39; | QUESTNNR==&#39;Kinder_full&#39;)
+
+# Nur abgeschlossene Eintraege beruecksichtigen (FINISHED sollte Wert 1 haben)
+ds = ds %&gt;% dplyr::filter(as.logical(FINISHED))
+
+# Nur Einträge mit eindeutiger Gruppe berücksichtigen
+ds = ds %&gt;% dplyr::filter(ID03 == &quot;1&quot; | ID03 == &quot;2&quot;)
+
+# Zeige Anzahl der TeilnehmerInnen
+show(paste(&quot;Anzahl Kinder:&quot;, length(unique(ds$PID))))</code></pre>
+<pre><code>## [1] &quot;Anzahl Kinder: 18&quot;</code></pre>
+<pre class="r"><code># Dieser Faktor gibt an, ob der Teilnehmer mit Roboter oder Tablet interagierte
+ds$TABLET_ROBOT = factor(
+  ds$ID03,
+  levels = c(&quot;1&quot;, &quot;2&quot;),
+  labels = c(&quot;Roboter&quot;, &quot;Avatar&quot;),
+  ordered = FALSE
+)
+summary(ds$TABLET_ROBOT)</code></pre>
+<pre><code>## Roboter  Avatar 
+##      28      11</code></pre>
+<pre class="r"><code># Waehle Kinder-Fragebogen aus
+  ds_kind = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Kinder_full&#39;) %&gt;%
+  
+# Nur abgeschlossene Eintraege beruecksichtigen (FINISHED sollte Wert 1 haben)
+  dplyr::filter(as.logical(FINISHED))
+
+# Nur Frageboegen mit PID berücksichtigen
+  ds_kind &lt;- ds_kind[-which(ds_kind$PID ==&quot;&quot;),]
+
+# Master-Table fuer Kind-Fragebogen Roboter-Interaktion
+  int_kind = data.frame(ds_kind$PID)
+  colnames(int_kind ) = &quot;ID&quot;
+
+# Gruppenrecodierung: Avatar vs Roboter
+  int_kind$group = ds_kind$ID03
+  int_kind$group [int_kind$group  == 1] = &quot;Roboter&quot;
+  int_kind$group [int_kind$group  == 2] = &quot;Avatar&quot;
+  
+  
+# Waehle Eltern-Fragebogen aus
+  ds_eltern = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Eltern_full&#39;) %&gt;%
+  
+# Nur abgeschlossene Eintraege beruecksichtigen (FINISHED sollte Wert 1 haben)
+  dplyr::filter(as.logical(FINISHED))
+
+# Master-Table fuer eltern-Fragebogen Roboter-Interaktion
+  int_eltern = data.frame(ds_eltern$PID)
+  colnames(int_eltern ) = &quot;ID&quot;
+
+# Gruppenrecodierung: Avatar vs Roboter
+  int_eltern$group = ds_eltern$ID03
+  int_eltern$group [int_eltern$group  == 1] = &quot;Roboter&quot;
+  int_eltern$group [int_eltern$group  == 2] = &quot;Avatar&quot;</code></pre>
+<p><br></p>
+</div>
+<div id="vor-der-interaktion" class="section level3">
+<h3>Vor der Interaktion</h3>
+<p><strong>Hast du schon einmal mit einem Roboter gespielt?</strong></p>
+<pre class="r"><code># reference: https://strengejacke.github.io/sjPlot/reference/plot_likert.html
+
+# Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$robot_kenn = ds_kind$RB_ERFAHRUNG
+  
+# Waehle nur dieses Items aus  
+  int_kind_er = as_tibble(int_kind)
+  int_kind_er = int_kind_er %&gt;% dplyr::select(robot_kenn)
+
+# Kodiere Item um, definiere levels, faktorisiere und ordne sie
+  int_kind_er = data.frame(lapply(int_kind_er, factor, ordered=TRUE, 
+                          levels=1:2, 
+                          labels=c(&quot;Ja&quot;,&quot;Nein&quot;)))
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_er, catcount = 2)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/roboter_kennen-1.png" width="672" /></p>
+<p><strong>Wie aufgeregt bist du? &amp; Wie f&amp;uumlhlst du dich?</strong></p>
+<pre class="r"><code>  ## Variable F_AROUSAL und F_VALENZ
+  ds_kind &lt;- as.data.table(ds_kind)
+  ds_kind[,.(Mittelwert_Arousal = round(mean(F_AROUSAL,na.rm = TRUE),2),Mittelwert_Valenz = round(mean(F_VALENZ,na.rm = TRUE),2))]</code></pre>
+<pre><code>##    Mittelwert_Arousal Mittelwert_Valenz
+## 1:               36.5                57</code></pre>
+<pre class="r"><code>  ds_kind &lt;- as.data.frame(ds_kind)</code></pre>
+</div>
+<div id="persönlichkeit-robbie" class="section level3">
+<h3>Persönlichkeit Robbie</h3>
+<p>Hier werden semantische Differentiale auf einer Spanne von 1 bis 101 bewertet. Die Wertungen koennen auch zu drei Skalen zusammengefasst werden.</p>
+<pre class="r"><code># Berechnen der Skalenwerte von Mittelwerten der dazugehoerigen Items
+  ds_kind$GDSPD_ANTHROMORPHISM = rowMeans(ds_kind[c(&quot;GDSPD01&quot;, &quot;GDSPD02&quot;, &quot;GDSPD03&quot;, &quot;GDSPD04&quot;)], na.rm = T)
+  ds_kind$GDSPD_LIKABILITY = rowMeans(ds_kind[c(&quot;GDSPD05&quot;, &quot;GDSPD06&quot;, &quot;GDSPD07&quot;, &quot;GDSPD08&quot;)], na.rm = T)
+  ds_kind$GDSPD_INTELLIGENCE = rowMeans(ds_kind[c(&quot;GDSPD10&quot;)], na.rm = T)
+
+# Zuordnen der entsprechenden Extrema-Beschriftungen
+  attr(ds_kind$GDSPD01,&quot;1&quot;) = &quot;Wie eine Maschine&quot;
+  attr(ds_kind$GDSPD01,&quot;101&quot;) = &quot;Wie ein Mensch&quot;
+  attr(ds_kind$GDSPD02,&quot;1&quot;) = &quot;Unecht&quot;
+  attr(ds_kind$GDSPD02,&quot;101&quot;) = &quot;Natuerlich&quot;
+  attr(ds_kind$GDSPD03,&quot;1&quot;) = &quot;Kuenstlich&quot;
+  attr(ds_kind$GDSPD03,&quot;101&quot;) = &quot;Realistisch&quot;
+  attr(ds_kind$GDSPD04,&quot;1&quot;) = &quot;Steif beim Bewegen&quot;
+  attr(ds_kind$GDSPD04,&quot;101&quot;) = &quot;Fluessig beim Bewegen&quot;
+  attr(ds_kind$GDSPD05,&quot;1&quot;) = &quot;Unfreundlich&quot;
+  attr(ds_kind$GDSPD05,&quot;101&quot;) = &quot;Freundlich&quot;
+  attr(ds_kind$GDSPD06,&quot;1&quot;) = &quot;Unangenehm&quot;
+  attr(ds_kind$GDSPD06,&quot;101&quot;) = &quot;Angenehm&quot;
+  attr(ds_kind$GDSPD07,&quot;1&quot;) = &quot;Unhoeflich&quot;
+  attr(ds_kind$GDSPD07,&quot;101&quot;) = &quot;Hoeflich&quot;
+  attr(ds_kind$GDSPD08,&quot;1&quot;) = &quot;Furchtbar&quot;
+  attr(ds_kind$GDSPD08,&quot;101&quot;) = &quot;Nett&quot;
+  attr(ds_kind$GDSPD10,&quot;1&quot;) = &quot;Dumm&quot;
+  attr(ds_kind$GDSPD10,&quot;101&quot;) = &quot;Klug&quot;
+  
+# Aufteilen in Kind- und Eltern-Rating
+  int_kind$GDSPD01 = ds_kind$GDSPD01
+  int_kind$GDSPD02 = ds_kind$GDSPD02
+  int_kind$GDSPD03 = ds_kind$GDSPD03
+  int_kind$GDSPD04 = ds_kind$GDSPD04
+  int_kind$GDSPD05 = ds_kind$GDSPD05
+  int_kind$GDSPD06 = ds_kind$GDSPD06
+  int_kind$GDSPD07 = ds_kind$GDSPD07
+  int_kind$GDSPD08 = ds_kind$GDSPD08
+  int_kind$GDSPD10 = ds_kind$GDSPD10
+  int_kind$GDSPD_ANTHROMORPHISM  = ds_kind$GDSPD_ANTHROMORPHISM
+  int_kind$GDSPD_LIKABILITY = ds_kind$GDSPD_LIKABILITY 
+  int_kind$GDSPD_INTELLIGENCE = ds_kind$GDSPD_INTELLIGENCE
+  
+  
+  # Berechnen der Skalenwerte von Mittelwerten der dazugeh?rigen Items
+  ds_eltern$GDSPD_ANTHROMORPHISM = rowMeans(ds_eltern[c(&quot;GDSPD01&quot;, &quot;GDSPD02&quot;, &quot;GDSPD03&quot;, &quot;GDSPD04&quot;)], na.rm = T)
+  ds_eltern$GDSPD_LIKABILITY = rowMeans(ds_eltern[c(&quot;GDSPD05&quot;, &quot;GDSPD06&quot;, &quot;GDSPD07&quot;, &quot;GDSPD08&quot;)], na.rm = T)
+  ds_eltern$GDSPD_INTELLIGENCE = rowMeans(ds_eltern[c(&quot;GDSPD10&quot;)], na.rm = T)
+
+# Zuordnen der entsprechenden Extrema-Beschriftungen
+  attr(ds_eltern$GDSPD01,&quot;1&quot;) = &quot;Wie eine Maschine&quot;
+  attr(ds_eltern$GDSPD01,&quot;101&quot;) = &quot;Wie ein Mensch&quot;
+  attr(ds_eltern$GDSPD02,&quot;1&quot;) = &quot;Unecht&quot;
+  attr(ds_eltern$GDSPD02,&quot;101&quot;) = &quot;Natuerlich&quot;
+  attr(ds_eltern$GDSPD03,&quot;1&quot;) = &quot;Kuenstlich&quot;
+  attr(ds_eltern$GDSPD03,&quot;101&quot;) = &quot;Realistisch&quot;
+  attr(ds_eltern$GDSPD04,&quot;1&quot;) = &quot;Steif beim Bewegen&quot;
+  attr(ds_eltern$GDSPD04,&quot;101&quot;) = &quot;Fluessig beim Bewegen&quot;
+  attr(ds_eltern$GDSPD05,&quot;1&quot;) = &quot;Unfreundlich&quot;
+  attr(ds_eltern$GDSPD05,&quot;101&quot;) = &quot;Freundlich&quot;
+  attr(ds_eltern$GDSPD06,&quot;1&quot;) = &quot;Unangenehm&quot;
+  attr(ds_eltern$GDSPD06,&quot;101&quot;) = &quot;Angenehm&quot;
+  attr(ds_eltern$GDSPD07,&quot;1&quot;) = &quot;Unhoeflich&quot;
+  attr(ds_eltern$GDSPD07,&quot;101&quot;) = &quot;Hoeflich&quot;
+  attr(ds_eltern$GDSPD08,&quot;1&quot;) = &quot;Furchtbar&quot;
+  attr(ds_eltern$GDSPD08,&quot;101&quot;) = &quot;Nett&quot;
+  attr(ds_eltern$GDSPD10,&quot;1&quot;) = &quot;Dumm&quot;
+  attr(ds_eltern$GDSPD10,&quot;101&quot;) = &quot;Klug&quot;
+  
+# Aufteilen in Kind- und Eltern-Rating
+  int_eltern$GDSPD01 = ds_eltern$GDSPD01
+  int_eltern$GDSPD02 = ds_eltern$GDSPD02
+  int_eltern$GDSPD03 = ds_eltern$GDSPD03
+  int_eltern$GDSPD04 = ds_eltern$GDSPD04
+  int_eltern$GDSPD05 = ds_eltern$GDSPD05
+  int_eltern$GDSPD06 = ds_eltern$GDSPD06
+  int_eltern$GDSPD07 = ds_eltern$GDSPD07
+  int_eltern$GDSPD08 = ds_eltern$GDSPD08
+  int_eltern$GDSPD10 = ds_eltern$GDSPD10
+  int_eltern$GDSPD_ANTHROMORPHISM  = ds_eltern$GDSPD_ANTHROMORPHISM
+  int_eltern$GDSPD_LIKABILITY = ds_eltern$GDSPD_LIKABILITY 
+  int_eltern$GDSPD_INTELLIGENCE = ds_eltern$GDSPD_INTELLIGENCE</code></pre>
+<p><strong>Einschätzung der Kinder</strong></p>
+<pre class="r"><code># Separieren in Avatar- und Roboter-Gruppe
+  robot_gdspd_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
+  avatar_gdspd_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
+  
+# Zeichne Violin-Plot
+  robo_kind_gdspd = robot_gdspd_kind[grep(&quot;GDSPD&quot;, colnames(robot_gdspd_kind ))] %&gt;% tidyr::gather() %&gt;% ggplot(aes(y=value, x=key, fill = key, color = key))+
+  geom_violin(draw_quantiles = 0.5)+
+  scale_color_manual(values=c(&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,
+                              &quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;))+
+  scale_fill_manual(values=c(&quot;#B3238B&quot;,&quot;#FFE25D&quot;,&quot;#2886B3&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,
+                             &quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#FFE25D&quot;))+
+  theme(legend.position = &quot;none&quot;)+
+  coord_flip()+
+  ylab(&quot;Rating 0-100 %&quot;)+
+  xlab(&quot;Item&quot;)
+  
+# Zeichne Violin-Plot
+  avatar_kind_gdspd = avatar_gdspd_kind[grep(&quot;GDSPD&quot;, colnames(avatar_gdspd_kind ))] %&gt;% tidyr::gather() %&gt;% ggplot(aes(y=value, x=key, fill = key, color = key))+
+  geom_violin(draw_quantiles = 0.5)+
+  scale_color_manual(values=c(&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,
+                              &quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;))+
+  scale_fill_manual(values=c(&quot;#B3238B&quot;,&quot;#FFE25D&quot;,&quot;#2886B3&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,
+                             &quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#FFE25D&quot;))+
+  theme(legend.position = &quot;none&quot;)+
+  coord_flip()+
+  ylab(&quot;Rating 0-100 %&quot;)+
+  xlab(&quot;Item&quot;)
+  
+  
+  combine_plots(robo_kind_gdspd, avatar_kind_gdspd,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Kind_Godspeed_Violin-1.png" width="672" /></p>
+<p><strong>Einschätzung der Eltern</strong></p>
+<pre class="r"><code># Separieren in Avatar- und Roboter-Gruppe
+  robot_gdspd_eltern = int_eltern[int_eltern$group == &quot;Roboter&quot;,]
+  avatar_gdspd_eltern = int_eltern[int_eltern$group == &quot;Avatar&quot;,]
+  
+# Zeichne Violin-Plot
+  robo_eltern_gdspd = robot_gdspd_eltern[grep(&quot;GDSPD&quot;, colnames(robot_gdspd_eltern ))] %&gt;% tidyr::gather() %&gt;% ggplot(aes(y=value, x=key, fill = key, color = key))+
+  geom_violin(draw_quantiles = 0.5)+
+  scale_color_manual(values=c(&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,
+                              &quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;))+
+  scale_fill_manual(values=c(&quot;#B3238B&quot;,&quot;#FFE25D&quot;,&quot;#2886B3&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,
+                             &quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#FFE25D&quot;))+
+  theme(legend.position = &quot;none&quot;)+
+  coord_flip()+
+  ylab(&quot;Rating 0-100 %&quot;)+
+  xlab(&quot;Item&quot;)
+
+# Zeichne Violin-Plot
+  avatar_eltern_gdspd = avatar_gdspd_eltern[grep(&quot;GDSPD&quot;, colnames(avatar_gdspd_eltern ))] %&gt;% tidyr::gather() %&gt;% ggplot(aes(y=value, x=key, fill = key, color = key))+
+  geom_violin(draw_quantiles = 0.5)+
+  scale_color_manual(values=c(&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,
+                              &quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;,&quot;gray32&quot;))+
+  scale_fill_manual(values=c(&quot;#B3238B&quot;,&quot;#FFE25D&quot;,&quot;#2886B3&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,&quot;#FF8FDF&quot;,
+                             &quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#8FDBFF&quot;,&quot;#FFE25D&quot;))+
+  theme(legend.position = &quot;none&quot;)+
+  coord_flip()+
+  ylab(&quot;Rating 0-100 %&quot;)+
+  xlab(&quot;Item&quot;)
+  
+  
+  combine_plots(robo_eltern_gdspd, avatar_eltern_gdspd,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Eltern_Godspeed_Violin-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="beziehung-zu-robbie" class="section level3">
+<h3>Beziehung zu Robbie</h3>
+<p><br></p>
+<div id="integration-of-others-in-the-self-ios" class="section level4">
+<h4>Integration of Others in the Self (IOS)</h4>
+<p>Mittels eines Venn-Diagramms in drei Stufen von Nähe haben die Kinder ihre gefühlte Nähe zum Roboter bewertet. Die Grafiken zeigten entweder einen Jungen oder ein Mädchen als Avatar des Kindes.</p>
+<pre class="r"><code># Es gibt zwei Versionen des IOS (fuer Maedchen vs Jungen)in SocsciSurvey.
+# Fuer jedes Kind existiert aber hoechstens ein Rating, weshalb das Rating fuer IOS_F uebernommen wird, 
+# falls IOS_M keinen Wert enthaelt.
+
+int_kind$IOS = recode(ds_kind$IOS_M, .missing = ds_kind$IOS_F)
+int_kind$IOS = factor(
+  int_kind$IOS,
+  levels = c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;),
+  labels = c(&quot;Gar nicht nah&quot;, &quot;Mittelmaessig nah&quot;, &quot;sehr nah&quot;),
+  ordered = TRUE
+)
+
+# Trenne nach Avatar / Roboter Gruppe
+  robot_int_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
+  avatar_int_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
+  
+# Waehle nur dieses Item aus  
+  robot_int_kind = as_tibble(robot_int_kind)
+  robot_int_ios = robot_int_kind %&gt;% dplyr::select(IOS)
+  
+  avatar_int_kind = as_tibble(avatar_int_kind)
+  avatar_int_ios = avatar_int_kind %&gt;% dplyr::select(IOS)
+  
+# Kombiniere Daten von Roboter- und Avatar-Einschaetzung  
+# Problem: Die Dataframes haben eine untersch. Laenge
+  comb_int_use = merge(robot_int_ios,avatar_int_ios, by = &quot;row.names&quot;, all = T, suffixes = c(&quot;&quot;,&quot;&quot;))</code></pre>
+<pre><code>## Warning in merge.data.frame(robot_int_ios,
+## avatar_int_ios, by = &quot;row.names&quot;, : column name
+## &#39;IOS&#39; is duplicated in the result</code></pre>
+<pre class="r"><code>  comb_int_use$Row.names &lt;- NULL
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(comb_int_use, catcount = 3,  wrap.legend.labels = 10, values = FALSE,
+                c(rep(&quot;A: Einschaetzung Roboter&quot;, 1), rep(&quot;B: Einschaetzung Avatar&quot;, 1)),
+                geom.colors = c(&quot;#B34954&quot;,&quot;#FFFCA6&quot;,&quot;#5292B3&quot;),
+                rel_heights = c(6, 8))</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/IOS-1.png" width="672" /></p>
+</div>
+<div id="beziehungsqualität" class="section level4">
+<h4>Beziehungsqualität</h4>
+<p><strong>Einschätzung der Kinder</strong></p>
+<pre class="r"><code># reference: https://strengejacke.github.io/sjPlot/reference/plot_likert.html
+
+# Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$Sich_Unterhalten = ds_kind$RB_UNTERHALTEN
+  int_kind$Zeit_verbringen = ds_kind$RB_ZEIT
+  int_kind$Interesse = ds_kind$RB_INTERESSE
+  int_kind$Verstehen = ds_kind$RB_VERSTEHEN
+  int_kind$Verstanden_werden = ds_kind$RB_VERSTANDEN
+  int_kind$Freunde_sein = ds_kind$RB_FREUNDE
+  
+# Trenne nach Avatar / Roboter Gruppe
+  robot_int_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
+  avatar_int_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
+  
+# Waehle nur diese Items aus  
+  robot_int_kind = as_tibble(robot_int_kind)
+  robot_int_use = robot_int_kind %&gt;% dplyr::select(Sich_Unterhalten:Freunde_sein)
+  
+  avatar_int_kind = as_tibble(avatar_int_kind)
+  avatar_int_use = avatar_int_kind %&gt;% dplyr::select(Sich_Unterhalten:Freunde_sein)
+  
+# Kodiere Items um, definiere levels, faktorisiere und ordne sie
+  robot_int_use = data.frame(lapply(robot_int_use, factor, ordered=TRUE, 
+                          levels=1:5, 
+                          labels=c(&quot;Stimme Ueberhaupt nicht zu&quot;,&quot;Stimme nicht zu&quot;,
+                                   &quot;Unentschieden&quot;,&quot;Stimme zu&quot;,&quot;Stimme voellig zu&quot;)))
+  
+  avatar_int_use = data.frame(lapply(avatar_int_use, factor, ordered=TRUE, 
+                          levels=1:5, 
+                          labels=c(&quot;Stimme Ueberhaupt nicht zu&quot;,&quot;Stimme nicht zu&quot;,
+                                   &quot;Unentschieden&quot;,&quot;Stimme zu&quot;,&quot;Stimme voellig zu&quot;)))
+    
+# Kombiniere Daten von Roboter- und Avatar-Einschaetzung  
+  comb_int_use = merge(robot_int_use,avatar_int_use, by = &quot;row.names&quot;, all = T, suffixes = c(&quot;&quot;,&quot;&quot;))
+   comb_int_use$Row.names &lt;- NULL
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(comb_int_use, catcount = 5,  wrap.legend.labels = 10, values = FALSE,
+                c(rep(&quot;A: Einschaetzung Roboter&quot;, 6), rep(&quot;B: Einschaetzung Avatar&quot;, 6)),
+                geom.colors = c(&quot;#B34954&quot;,&quot;#FF828E&quot;,&quot;#FFFCA6&quot;,&quot;#69CDFF&quot;,&quot;#5292B3&quot;),
+                rel_heights = c(6, 8))</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Kind_Usab_Bez_Fragen-1.png" width="672" /></p>
+<p><strong>Einschätzung der Eltern</strong></p>
+<pre class="r"><code># reference: https://strengejacke.github.io/sjPlot/reference/plot_likert.html
+
+# Fuege Items zu Master-Table fuer Elternerbefragung hinzu
+  int_eltern$Sich_Unterhalten = ds_eltern$B201_01
+  int_eltern$Zeit_verbringen = ds_eltern$B201_02
+  int_eltern$Interesse = ds_eltern$B201_03
+  int_eltern$Verstehen = ds_eltern$B201_04
+  int_eltern$Verstanden_werden = ds_eltern$B201_05
+  int_eltern$Freunde_sein = ds_eltern$B201_06
+  
+# Trenne nach Avatar / Roboter Gruppe
+  robot_int_eltern = int_eltern[int_eltern$group == &quot;Roboter&quot;,]
+  avatar_int_eltern = int_eltern[int_eltern$group == &quot;Avatar&quot;,]
+  
+# Waehle nur diese Items aus  
+  robot_int_eltern = as_tibble(robot_int_eltern)
+  robot_int_use = robot_int_eltern %&gt;% dplyr::select(Sich_Unterhalten:Freunde_sein)
+  robot_int_use = as.data.table(robot_int_use)
+  
+  avatar_int_eltern = as_tibble(avatar_int_eltern)
+  avatar_int_use = avatar_int_eltern %&gt;% dplyr::select(Sich_Unterhalten:Freunde_sein)
+  
+# Kodiere Items um, definiere levels, faktorisiere und ordne sie
+  robot_int_use = data.frame(lapply(robot_int_use, factor, ordered=TRUE, 
+                          levels=1:5, 
+                          labels=c(&quot;Stimme Ueberhaupt nicht zu&quot;,&quot;Stimme nicht zu&quot;,
+                                   &quot;Unentschieden&quot;,&quot;Stimme zu&quot;,&quot;Stimme voellig zu&quot;)))
+  
+  
+  avatar_int_use = data.frame(lapply(avatar_int_use, factor, ordered=TRUE, 
+                          levels=1:5, 
+                          labels=c(&quot;Stimme Ueberhaupt nicht zu&quot;,&quot;Stimme nicht zu&quot;,
+                                   &quot;Unentschieden&quot;,&quot;Stimme zu&quot;,&quot;Stimme voellig zu&quot;)))
+  
+# Kombiniere Daten von Roboter- und Avatar-Einschaetzung
+  comb_int_use = merge(robot_int_use,avatar_int_use, by = &quot;row.names&quot;, all = T, suffixes = c(&quot;&quot;,&quot;&quot;))
+  comb_int_use$Row.names &lt;- NULL
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(comb_int_use, catcount = 5,  wrap.legend.labels = 10, values = FALSE,
+                c(rep(&quot;A: Einschaetzung Roboter&quot;, 6), rep(&quot;B: Einschaetzung Avatar&quot;, 6)),
+                geom.colors = c(&quot;#B34954&quot;,&quot;#FF828E&quot;,&quot;#FFFCA6&quot;,&quot;#69CDFF&quot;,&quot;#5292B3&quot;),
+                rel_heights = c(6, 8))</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Eltern_Usab_Bez_Fragen-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="einschätzung-spiel" class="section level3">
+<h3>Einschätzung Spiel</h3>
+<pre class="r"><code># Extrahiere KidsGEQ Items  
+  int_kind$KGEQ01 = ds_kind$K102_01
+  int_kind$KGEQ02 = ds_kind$K102_02
+  int_kind$KGEQ03 = ds_kind$K102_03
+  int_kind$KGEQ04 = ds_kind$K102_04
+  int_kind$KGEQ05 = ds_kind$K102_05
+  int_kind$KGEQ06 = ds_kind$K102_06
+  int_kind$KGEQ07 = ds_kind$K102_07
+  int_kind$KGEQ08 = ds_kind$K102_08
+  int_kind$KGEQ09 = ds_kind$K102_09
+  int_kind$KGEQ10 = ds_kind$K102_10
+  int_kind$KGEQ11 = ds_kind$K102_11
+  int_kind$KGEQ12 = ds_kind$K102_12
+  int_kind$KGEQ13 = ds_kind$K102_13
+  int_kind$KGEQ14 = ds_kind$K102_14
+  int_kind$KGEQ15 = ds_kind$K102_15
+  int_kind$KGEQ16 = ds_kind$K102_16
+  int_kind$KGEQ17 = ds_kind$K102_17
+  
+  
+# Berechne Mittelwerte fuer die Dimensionen fuer jeden Probanden 
+  # her= Herausforderung, komp = Kompetenz. flow = Flow-Erleben, imm = Immersion, neg_aff = Negativer Affekt, pos_aff = Positiver Affekt, span = Spannung
+  
+  for (i in 1:nrow(int_kind)) {
+  
+  int_kind$GEQ_her[i] = rowMeans(int_kind[i,c(&quot;KGEQ01&quot;,&quot;KGEQ02&quot;,&quot;KGEQ03&quot;)], na.rm = FALSE, dims = 1)
+  int_kind$GEQ_komp[i] = int_kind[i,c(&quot;KGEQ04&quot;)]
+  int_kind$GEQ_flow[i] = rowMeans(int_kind[i,c(&quot;KGEQ05&quot;,&quot;KGEQ06&quot;,&quot;KGEQ07&quot;)], na.rm = FALSE, dims = 1)
+  int_kind$GEQ_imm[i] = rowMeans(int_kind[i,c(&quot;KGEQ08&quot;,&quot;KGEQ09&quot;)], na.rm = FALSE, dims = 1)
+  int_kind$GEQ_neg_aff[i] = rowMeans(int_kind[i,c(&quot;KGEQ10&quot;,&quot;KGEQ11&quot;,&quot;KGEQ12&quot;)], na.rm = FALSE, dims = 1)
+  int_kind$GEQ_pos_aff[i] = rowMeans(int_kind[i,c(&quot;KGEQ13&quot;,&quot;KGEQ14&quot;,&quot;KGEQ15&quot;)], na.rm = FALSE, dims = 1)
+  int_kind$GEQ_span[i] = rowMeans(int_kind[i,c(&quot;KGEQ16&quot;,&quot;KGEQ17&quot;)], na.rm = FALSE, dims = 1)
+  
+  }</code></pre>
+<p><strong>Einschätzung der Kinder zum Spiel, welches sie entweder mit dem Roboter oder Avatar gespielt haben:</strong></p>
+<pre class="r"><code>## Fuer Visualisierung   
+  
+# Teile in Roboter- und Avatar-Gruppe
+  robot_int_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
+  avatar_int_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
+  
+# Separieren von Einzelnen Items und Dimensionen  
+  robot_int_kind_item = robot_int_kind %&gt;% dplyr::select(KGEQ01:KGEQ17)
+  robot_int_kind_dim = robot_int_kind %&gt;% dplyr::select(GEQ_her:GEQ_span)
+  avatar_int_kind_item = avatar_int_kind %&gt;% dplyr::select(KGEQ01:KGEQ17)
+  avatar_int_kind_dim = avatar_int_kind %&gt;% dplyr::select(GEQ_her:GEQ_span)
+
+# Berechne Mittelwert fuer jedes Item 
+  geq_mean_robo_item = colMeans(robot_int_kind_item, na.rm = TRUE, dims = 1)
+  geq_mean_avat_item = colMeans(avatar_int_kind_item, na.rm = TRUE, dims = 1)
+  geq_mean_robo_dim = colMeans(robot_int_kind_dim, na.rm = TRUE, dims = 1)
+  geq_mean_avat_dim = colMeans(avatar_int_kind_dim, na.rm = TRUE, dims = 1)
+  
+# Definiere Namen der Items
+  clnames_all = c(&quot;Aufregend&quot;, &quot;Schwierig&quot;,&quot;Anstrengen&quot;,&quot;War gut&quot;,&quot;Aufmerksamkeit&quot;,
+                &quot;Alles vergessen&quot;, &quot;Im Spiel drin&quot;, &quot;Beeindruckend&quot;,
+                &quot;Schoen&quot;,&quot;Bloedes Spiel&quot;,&quot;Anstrengend&quot;,&quot;Langweilig&quot;,&quot;Musste Lachen&quot;,
+                &quot;Spielspass&quot;,&quot;Gut gefuehlt&quot;, &quot;Gestresst&quot;,&quot;Beschwerden&quot;)
+  
+  
+  clnames_all_dim = c(&quot;Herauforderung&quot;, &quot;Kompetenz&quot;,&quot;Flow&quot;, &quot;Immersion&quot;, &quot;Negativer Affekt&quot;,
+                  &quot;Positiver Affekt&quot;,&quot;Spannung&quot;)
+  
+# Kombinieren von Mittelwerten und Item-Namen
+  int_kind_geq_item_graph = data.frame(clnames_all, geq_mean_robo_item, geq_mean_avat_item)
+  int_kind_geq_dim_graph = data.frame(clnames_all_dim, geq_mean_robo_dim, geq_mean_avat_dim)
+
+# Mittelwert ueber beide Bedingungen berechnen
+int_kind_geq_item_graph = int_kind_geq_item_graph %&gt;% 
+  mutate(name = fct_reorder(clnames_all, geq_mean_robo_item)) %&gt;%
+  mutate(clnames_all=factor(clnames_all, clnames_all)) %&gt;%
+  mutate(mymean = mean(c(geq_mean_robo_item,geq_mean_avat_item) ))
+
+int_kind_geq_dim_graph = int_kind_geq_dim_graph %&gt;% 
+  mutate(name = fct_reorder(clnames_all_dim, geq_mean_robo_dim)) %&gt;%
+  mutate(clnames_all=factor(clnames_all_dim, clnames_all)) %&gt;%
+  mutate(mymean = mean(c(geq_mean_robo_dim,geq_mean_avat_dim) ))
+
+# Plot
+
+# Farben definieren
+  colors = c(&quot;#64B394&quot;,&quot;black&quot;)
+
+# Plotten
+ geq_kids_item = ggplot(int_kind_geq_item_graph) +
+            geom_segment(aes(x=clnames_all, xend=clnames_all, y= geq_mean_robo_item, yend=geq_mean_avat_item), color=&quot;black&quot;,size=1) +
+            geom_point(aes(x=clnames_all, y=geq_mean_robo_item, color = &quot;Roboter&quot;), size=4) +
+            geom_point(aes(x=clnames_all, y=geq_mean_avat_item, color = &quot;Avatar&quot;), size=4 ) +
+            coord_flip()+
+            theme(legend.position = &quot;bottom&quot;, axis.text.x = element_text(size = 12),axis.text.y = element_text(size = 12))+
+            xlab(&quot;&quot;) +
+            ylab(&quot;Likert Skala von 1 bis 5&quot;)+
+            ylim(1,5)+
+            scale_color_manual(name = element_blank(), labels = c(&quot;Roboter&quot;, &quot;Avatar&quot;), values = colors)
+ 
+ 
+  geq_kids_dim = ggplot(int_kind_geq_dim_graph) +
+            geom_segment(aes(x=clnames_all_dim, xend=clnames_all_dim, y= geq_mean_robo_dim, yend=geq_mean_avat_dim), color=&quot;black&quot;,size=1) +
+            geom_point(aes(x=clnames_all_dim, y=geq_mean_robo_dim, color = &quot;Roboter&quot;), size=4) +
+            geom_point(aes(x=clnames_all_dim, y=geq_mean_avat_dim, color = &quot;Avatar&quot;), size=4 ) +
+            coord_flip()+
+            theme(legend.position = &quot;bottom&quot;, axis.text.x = element_text(size = 12),axis.text.y = element_text(size = 12))+
+            xlab(&quot;&quot;) +
+            ylab(&quot;Likert Skala von 1 bis 5&quot;)+
+            ylim(1,5)+
+            scale_color_manual(name = element_blank(), labels = c(&quot;Roboter&quot;, &quot;Avatar&quot;), values = colors)
+  
+  
+        combine_plots(geq_kids_item, geq_kids_dim,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Kind_Int_KidsGEQ_Visualisierung-1.png" width="672" /></p>
+<pre class="r"><code># Extrahiere KidsGEQ Items  
+  int_eltern$KGEQ01 = ds_eltern$OLD_EGEQ01
+  int_eltern$KGEQ02 = ds_eltern$K101_02
+  int_eltern$KGEQ03 = ds_eltern$OLD_EGEQ02
+  int_eltern$KGEQ04 = ds_eltern$OLD_EGEQ03
+  int_eltern$KGEQ05 = ds_eltern$OLD_EGEQ04
+  int_eltern$KGEQ06 = ds_eltern$OLD_EGEQ05
+  int_eltern$KGEQ07 = ds_eltern$OLD_EGEQ06
+  int_eltern$KGEQ08 = ds_eltern$OLD_EGEQ07
+  int_eltern$KGEQ09 = ds_eltern$OLD_EGEQ08
+  int_eltern$KGEQ10 = ds_eltern$OLD_EGEQ09
+  int_eltern$KGEQ11 = ds_eltern$OLD_EGEQ10
+  int_eltern$KGEQ12 = ds_eltern$OLD_EGEQ11
+  int_eltern$KGEQ13 = ds_eltern$OLD_EGEQ12
+  int_eltern$KGEQ14 = ds_eltern$OLD_EGEQ13
+  int_eltern$KGEQ15 = ds_eltern$OLD_EGEQ14
+  int_eltern$KGEQ16 = ds_eltern$K101_16
+  int_eltern$KGEQ17 = ds_eltern$K101_17
+  
+  
+# Berechne Mittelwerte fuer die Dimensionen fuer jeden Probanden 
+  # her= Herausforderung, komp = Kompetenz. flow = Flow-Erleben, imm = Immersion, neg_aff = Negativer Affekt, pos_aff = Positiver Affekt, span = Spannung
+  
+  for (i in 1: nrow(int_eltern)) {
+  
+  int_eltern$GEQ_her[i] = rowMeans(int_eltern[i,c(&quot;KGEQ01&quot;,&quot;KGEQ02&quot;,&quot;KGEQ03&quot;)], na.rm = FALSE, dims = 1)
+  int_eltern$GEQ_komp[i] = int_eltern[i,c(&quot;KGEQ04&quot;)]
+  int_eltern$GEQ_flow[i] = rowMeans(int_eltern[i,c(&quot;KGEQ05&quot;,&quot;KGEQ06&quot;,&quot;KGEQ07&quot;)], na.rm = FALSE, dims = 1)
+  int_eltern$GEQ_imm[i] = rowMeans(int_eltern[i,c(&quot;KGEQ08&quot;,&quot;KGEQ09&quot;)], na.rm = FALSE, dims = 1)
+  int_eltern$GEQ_neg_aff[i] = rowMeans(int_eltern[i,c(&quot;KGEQ10&quot;,&quot;KGEQ11&quot;,&quot;KGEQ12&quot;)], na.rm = FALSE, dims = 1)
+  int_eltern$GEQ_pos_aff[i] = rowMeans(int_eltern[i,c(&quot;KGEQ13&quot;,&quot;KGEQ14&quot;,&quot;KGEQ15&quot;)], na.rm = FALSE, dims = 1)
+  int_eltern$GEQ_span[i] = rowMeans(int_eltern[i,c(&quot;KGEQ16&quot;,&quot;KGEQ17&quot;)], na.rm = FALSE, dims = 1)
+  
+  }</code></pre>
+<p><strong>Eltern-Einschätzung zum Spiel, welches ihr Kind entweder mit dem Roboter oder Avatar gespielt hat:</strong></p>
+<pre class="r"><code>## F?r Visualisierung   
+  
+  robot_int_eltern = int_eltern[int_eltern$group == &quot;Roboter&quot;,]
+  avatar_int_eltern = int_eltern[int_eltern$group == &quot;Avatar&quot;,]
+  
+# Separieren von Einzelnen Items und Dimensionen  
+  robot_int_eltern_item = robot_int_eltern %&gt;% dplyr::select(KGEQ01:KGEQ17)
+  robot_int_eltern_dim = robot_int_eltern %&gt;% dplyr::select(GEQ_her:GEQ_span)
+  avatar_int_eltern_item = avatar_int_eltern %&gt;% dplyr::select(KGEQ01:KGEQ17)
+  avatar_int_eltern_dim = avatar_int_eltern %&gt;% dplyr::select(GEQ_her:GEQ_span)
+
+# Berechne Mittelwert fuer jedes Item 
+  geq_mean_robo_item = colMeans(robot_int_eltern_item, na.rm = TRUE, dims = 1)
+  geq_mean_avat_item = colMeans(avatar_int_eltern_item, na.rm = TRUE, dims = 1)
+  geq_mean_robo_dim = colMeans(robot_int_eltern_dim, na.rm = TRUE, dims = 1)
+  geq_mean_avat_dim = colMeans(avatar_int_eltern_dim, na.rm = TRUE, dims = 1)
+  
+# Definiere Namen der Items
+  clnames_all = c(&quot;Aufregend&quot;, &quot;Schwierig&quot;,&quot;Anstrengen&quot;,&quot;War gut&quot;,&quot;Aufmerksamkeit&quot;,
+                &quot;Alles vergessen&quot;, &quot;Im Spiel drin&quot;, &quot;Beeindruckend&quot;,
+                &quot;Schoen&quot;,&quot;Bloedes Spiel&quot;,&quot;Anstrengend&quot;,&quot;Langweilig&quot;,&quot;Musste Lachen&quot;,
+                &quot;Spielspass&quot;,&quot;Gut gefuehlt&quot;, &quot;Gestresst&quot;,&quot;Beschwerden&quot;)
+  
+  
+  clnames_all_dim = c(&quot;Herauforderung&quot;, &quot;Kompetenz&quot;,&quot;Flow&quot;, &quot;Immersion&quot;, &quot;Negativer Affekt&quot;,
+                  &quot;Positiver Affekt&quot;,&quot;Spannung&quot;)
+  
+# Kombinieren von Mittelwerten und Item-Namen
+  int_eltern_geq_item_graph = data.frame(clnames_all, geq_mean_robo_item, geq_mean_avat_item)
+  int_eltern_geq_dim_graph = data.frame(clnames_all_dim, geq_mean_robo_dim, geq_mean_avat_dim)
+
+# Mittelwert über beide Bedingungen berechnen
+int_eltern_geq_item_graph = int_eltern_geq_item_graph %&gt;% 
+  mutate(name = fct_reorder(clnames_all, geq_mean_robo_item)) %&gt;%
+  mutate(clnames_all=factor(clnames_all, clnames_all)) %&gt;%
+  mutate(mymean = mean(c(geq_mean_robo_item,geq_mean_avat_item) ))
+
+int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;% 
+  mutate(name = fct_reorder(clnames_all_dim, geq_mean_robo_dim)) %&gt;%
+  mutate(clnames_all=factor(clnames_all_dim, clnames_all)) %&gt;%
+  mutate(mymean = mean(c(geq_mean_robo_dim,geq_mean_avat_dim) ))
+
+# Plot
+
+# Farben definieren
+  colors = c(&quot;#A84A85&quot;,&quot;black&quot;)
+
+# Plotten
+ geq_kids_item = ggplot(int_eltern_geq_item_graph) +
+            geom_segment(aes(x=clnames_all, xend=clnames_all, y= geq_mean_robo_item, yend=geq_mean_avat_item), color=&quot;black&quot;,size=1) +
+            geom_point(aes(x=clnames_all, y=geq_mean_robo_item, color = &quot;Roboter&quot;), size=4) +
+            geom_point(aes(x=clnames_all, y=geq_mean_avat_item, color = &quot;Avatar&quot;), size=4 ) +
+            coord_flip()+
+            theme(legend.position = &quot;bottom&quot;, axis.text.x = element_text(size = 12),axis.text.y = element_text(size = 12))+
+            xlab(&quot;&quot;) +
+            ylab(&quot;Likert Skala von 1 bis 5&quot;)+
+            ylim(1,5)+
+            scale_color_manual(name = element_blank(), labels = c(&quot;Roboter&quot;, &quot;Avatar&quot;), values = colors)
+ 
+ 
+  geq_kids_dim = ggplot(int_eltern_geq_dim_graph) +
+            geom_segment(aes(x=clnames_all_dim, xend=clnames_all_dim, y= geq_mean_robo_dim, yend=geq_mean_avat_dim), color=&quot;black&quot;,size=1) +
+            geom_point(aes(x=clnames_all_dim, y=geq_mean_robo_dim, color = &quot;Roboter&quot;), size=4) +
+            geom_point(aes(x=clnames_all_dim, y=geq_mean_avat_dim, color = &quot;Avatar&quot;), size=4 ) +
+            coord_flip()+
+            theme(legend.position = &quot;bottom&quot;, axis.text.x = element_text(size = 12),axis.text.y = element_text(size = 12))+
+            xlab(&quot;&quot;) +
+            ylab(&quot;Likert Skala von 1 bis 5&quot;)+
+            ylim(1,5)+
+            scale_color_manual(name = element_blank(), labels = c(&quot;Roboter&quot;, &quot;Avatar&quot;), values = colors)
+  
+  
+        combine_plots(geq_kids_item, geq_kids_dim,
+                               ncol = 2, nrow=1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                               caption.color = &quot;black&quot;)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Eltern_Int_KidsGEQ_Visualisierung-1.png" width="672" /></p>
+<p><strong>Hattest du generell das Gefühl, dass das Spiel deine Aufregung steigert, also dich nervös macht, oder etwas stresst?</strong></p>
+<pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$spielstress = ds_kind$QF01
+
+# Waehle nur dieses Items aus  
+  int_kind_qual1 = as_tibble(int_kind)
+  int_kind_qual1 = int_kind_qual1 %&gt;% dplyr::select(spielstress)
+
+# Kodiere Item um, definiere levels, faktorisiere und ordne sie
+  int_kind_qual1 = data.frame(lapply(int_kind_qual1, factor, ordered=TRUE, 
+                          levels=1:3, 
+                          labels=c(&quot;Nein, ueberhaupt nicht.&quot;,&quot;Ja, ein wenig.&quot;,&quot;Ja, total.&quot;)))
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_qual1, catcount = 3)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/spielstress-1.png" width="672" /></p>
+<p><strong>Zeig mal, wie sehr warst du beim Spielen aufgeregt?</strong></p>
+<pre class="r"><code>  ## Aufregung beim gesamten Spiel (Variable QF_02)
+  round(mean(ds_kind$QF02_01,na.rm = TRUE),2)</code></pre>
+<pre><code>## [1] 62.25</code></pre>
+<p><strong>Begründe deine Antwort: Was war vor allem aufregend, was nicht?</strong></p>
+<ul>
+<li>Qualitative Antworten ergänzen</li>
+<li>Qualitative Antworten ergänzen</li>
+</ul>
+<p><strong>Wie könnte man Spiel noch aufregender machen?</strong></p>
+<ul>
+<li>Qualitative Antworten ergänzen</li>
+<li>Qualitative Antworten ergänzen</li>
+</ul>
+</div>
+<div id="einschätzung-atemübung" class="section level3">
+<h3>Einschätzung Atemübung</h3>
+<p><br></p>
+<p><strong>Ich habe bei der Atemübung gut mitgemacht.</strong></p>
+<pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$adh_ueb = ds_kind$QF05
+
+# Waehle nur dieses Items aus  
+  int_kind_adh_ueb = as_tibble(int_kind)
+  int_kind_adh_ueb = int_kind_adh_ueb %&gt;% dplyr::select(adh_ueb)
+  
+ int_kind_adh_ueb = data.frame(lapply(int_kind_adh_ueb, factor, ordered=TRUE, 
+                          levels=1:5, 
+                          labels=c(&quot;Stimme Ueberhaupt nicht zu&quot;,&quot;Stimme nicht zu&quot;,
+                                   &quot;Unentschieden&quot;,&quot;Stimme zu&quot;,&quot;Stimme voellig zu&quot;)))
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_adh_ueb, catcount = 5)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/adherenz_uebung-1.png" width="672" /></p>
+<p><strong>Wie hast du dich nach den Übungen gefühlt?</strong></p>
+<pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$gef_nach_ue= ds_kind$QF06
+
+# Waehle nur dieses Items aus  
+  int_kind_gef_nach_ue = as_tibble(int_kind)
+  int_kind_gef_nach_ue = int_kind_gef_nach_ue %&gt;% dplyr::select(spielstress)
+
+# Kodiere Item um, definiere levels, faktorisiere und ordne sie
+  int_kind_gef_nach_ue = data.frame(lapply(int_kind_gef_nach_ue, factor, ordered=TRUE, 
+                          levels=1:3, 
+                          labels=c(&quot;Entspannter als vorher&quot;,&quot;Genauso wie vorher&quot;,&quot;Aufgeregter als vorher&quot;)))
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_gef_nach_ue, catcount = 3)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/gefuehl_nach_uebung_kinder-1.png" width="672" /></p>
+<pre class="r"><code>  ## Differenzscores berechnen
+  # Neues Dataset erstellen
+  diffscores &lt;- ds_uebung[, .(EXC_NR,FG01_01, FG02_01,FG03_01,FG04_01, PID)]
+
+  #  Gefuehl nach dem Spiel (Variable FG01_01) und nach der Atemübung (Variable FG02_01)
+  diffscores[,DIFF_VAL := ds_uebung[,.(FG01_01-FG02_01)]]
+
+  # Arousal nach dem Spiel (Variable FG03_01) und nach der Atemübung (Variable FG04_01)
+  diffscores[,DIFF_ARO :=ds_uebung[,.(FG03_01-FG04_01)]]
+  
+  ## Mittelwerte der DIfferenzscores berechnen
+  diffscores[,.(Mittelwert_Differenzscore_Valenz = round(mean(DIFF_VAL,na.rm = TRUE),2), Mittelwert_Differenzscore_Arousal = round(mean(DIFF_ARO,na.rm = TRUE),2)), keyby = EXC_NR]</code></pre>
+<pre><code>##    EXC_NR Mittelwert_Differenzscore_Valenz
+## 1:      1                               26
+## 2:      2                               -5
+## 3:      3                              -42
+## 4:      4                              -25
+## 5:      5                              -36
+## 6:      6                              -35
+##    Mittelwert_Differenzscore_Arousal
+## 1:                               -50
+## 2:                                39
+## 3:                                39
+## 4:                                39
+## 5:                                57
+## 6:                                32</code></pre>
+<pre class="r"><code>  ## Visualisierung Differenzscores pro Uebung
+  # Daten fuer ggplot ins Long-format bringen
+  diffscores_long &lt;- melt(diffscores,id.vars= c(&quot;EXC_NR&quot;, &quot;PID&quot;), measure.vars=c(&quot;DIFF_VAL&quot;, &quot;DIFF_ARO&quot;))
+  
+  # Summary mit Daten fuer den Plot erstellen
+  summary &lt;- summarySE(diffscores_long, measurevar= &quot;value&quot; , groupvars= c(&quot;variable&quot;,&quot;EXC_NR&quot;),na.rm = TRUE)</code></pre>
+<pre><code>## Warning in qt(conf.interval/2 + 0.5, datac$N - 1):
+## NaNs wurden erzeugt</code></pre>
+<pre class="r"><code>  # plotten
+  ggplot(data = summary, aes(x = EXC_NR, y = value, col= variable, ymin = value + sd, ymax = value - sd)) + 
+      geom_pointrange(position = position_dodge(0.5)) +
+      labs( title = &quot;Mittelwerte&quot;, x = &quot;Uebung&quot;, y = &quot;Differenz&quot;) +
+      scale_x_discrete(breaks = 1:6, labels = 1:6, limits = 1:6) +
+      scale_color_discrete (labels = c(&quot;Differenz Valenz&quot;, &quot;Differenz Arousal&quot;)) +
+      #scale_y_continuous(breaks =) + kann spaeter angepasst werden
+      theme_bw() +
+      theme(legend.title = element_blank())</code></pre>
+<pre><code>## Warning: Removed 12 rows containing missing values
+## (geom_pointrange).</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/effekt_uebung_eltern_visualisierung-1.png" width="672" /></p>
+<p><strong>Hattest du das Gefühl, dass Robbie dich beim Entspannen gut unterstützt hat?</strong></p>
+<pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$wirk_Robbie = ds_kind$QF07
+
+# Waehle nur dieses Items aus  
+  int_kind_wirk_Robbie = as_tibble(int_kind)
+  int_kind_wirk_Robbie = int_kind_wirk_Robbie %&gt;% dplyr::select(spielstress)
+
+# Kodiere Item um, definiere levels, faktorisiere und ordne sie
+  int_kind_wirk_Robbie = data.frame(lapply(int_kind_wirk_Robbie, factor, ordered=TRUE, 
+                          levels=1:3, 
+                          labels=c(&quot;Ja&quot;,&quot;Ein bisschen&quot;,&quot;Nein&quot;)))
+  
+  
+  # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_wirk_Robbie, catcount = 3)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Robbie_Entspannung_unterstuetzt-1.png" width="672" /></p>
+<p><strong>Wenn ja, was hat dir vor allem geholfen? Bzw. wenn nein, was hat dir gefehlt, oder was könnte Robbie besser machen?</strong></p>
+<ul>
+<li>Qualitative Antworten ergänzen</li>
+<li>Qualitative Antworten ergänzen</li>
+</ul>
+<p><strong>Ich würde die Atemübung gern wieder machen.</strong></p>
+<pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$ueb_wied = ds_kind$QF09
+
+# Waehle nur dieses Items aus  
+  int_kind_ueb_wied = as_tibble(int_kind)
+  int_kind_ueb_wied = int_kind_ueb_wied %&gt;% dplyr::select(ueb_wied)
+  
+ int_kind_ueb_wied = data.frame(lapply(int_kind_ueb_wied, factor, ordered=TRUE, 
+                          levels=1:5, 
+                          labels=c(&quot;Stimme Ueberhaupt nicht zu&quot;,&quot;Stimme nicht zu&quot;,
+                                   &quot;Unentschieden&quot;,&quot;Stimme zu&quot;,&quot;Stimme voellig zu&quot;)))
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_ueb_wied, catcount = 5)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/uebung_wiederholen-1.png" width="672" /></p>
+<p><strong>Könntest du dir vorstellen, dass du im Alltag diese Atemübung ohne Robbie machst, wenn du sehr aufgeregt bist und dich beruhigen möchtest?</strong></p>
+<pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$ueb_alltag = ds_kind$QF10
+
+# Waehle nur dieses Item aus  
+  int_kind_ueb_alltag = as_tibble(int_kind)
+  int_kind_ueb_alltag = int_kind_ueb_alltag %&gt;% dplyr::select(spielstress)
+
+# Kodiere Item um, definiere levels, faktorisiere und ordne sie
+  int_kind_ueb_alltag = data.frame(lapply(int_kind_ueb_alltag, factor, ordered=TRUE, 
+                          levels=1:3, 
+                          labels=c(&quot;Ja&quot;,&quot;Vielleicht&quot;,&quot;Nein&quot;)))
+  
+  
+  # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(int_kind_ueb_alltag, catcount = 3)</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/uebung_alltag-1.png" width="672" /></p>
+<p><strong>Was machst du, wenn du dich entspannen möchtest? Vielleicht kennst du eine gute Entspannungsübung, die Robbie mit Kinder machen könnte?</strong></p>
+<ul>
+<li>Qualitative Antworten ergänzen</li>
+<li>Qualitative Antworten ergänzen</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
