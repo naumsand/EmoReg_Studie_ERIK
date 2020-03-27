@@ -5,11 +5,10 @@ output:
     code_folding: hide
     toc: true
     toc_float: true
-    toc_depth: 4
+    toc_depth: 2
 ---
-# Vorbereitung 
-## Einstellungen
-````{r Setup, include = FALSE, }
+
+````{r Setup / Packages, include = FALSE, }
 ## Einstellungen rmark_down
 # Generell
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
@@ -21,11 +20,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ## Environment leeren
   rm(list = ls())
-```
-
-```{r Packages, message = FALSE, warning = FALSE}
- 
-  # Benoetigte Packages laden und installieren
+  
+## Benoetigte Packages laden und installieren
   #install.packages("lubridate")
   #install.packages("data.table")
   #install.packages("dplyr")
@@ -40,20 +36,12 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
   library(corrplot)
   library(ggstatsplot)
   library(rlang)
-
 ```
 
-## Daten importieren  
-
-Die Datensets von dem Fragebogen Screening werden geladen.
-
-```{r Import}
+```{r Import / Organisation, results = "hide"}
   screening <- read.csv("Screening.csv", sep=";", colClasses = c(STARTED = "POSIXct",LASTDATA = "POSIXct",SD01_01 = "character"))
   # Die Variable SD01_01(Geburtsdatum) wird nicht als Datum erkannt, daher importieren wir sie zunaechst als Character und wandeln sie spaeter um.
-```
 
-## Daten organisieren 
-```{r Organisation, results = "hide"}
   ## Daten filtern nach beendeten Durchgaengen
   # fuer die Verwendung von data.table sicherstellen, dass screening data.table
   screening <- as.data.table(screening)
@@ -63,24 +51,30 @@ Die Datensets von dem Fragebogen Screening werden geladen.
   screening[FINISHED == 1,.N]
   # nur beendete Frageboegen verwenden
   screening <- screening[FINISHED == 1]
+  
+  # Hier schon einmal Ideen, wenn wir Frageboegen mit NAs rausnehmen muessen: 
+  
   # nur Frageboegen mit ID-Angabe verwenden
-  screening <- screening[ID01_01|ID01_02|ID01_03|ID01_04 != NA]
+  #screening <- screening[ID01_01|ID01_02|ID01_03|ID01_04 != NA]
   
   ## Weitere fehlende Werte?
-  any(is.na(screening))
+  #any(is.na(screening))
+
 ```
 
-Der Screeningfragebogen wurde f&uumlr `r screening[,.N]` Kinder ausgef&uumlllt, davon sind `r screening[FINISHED == 1,.N]` Frageb&oumlgen vollst&aumlndig. Nur diese Frageb&oumlgen werden in die Analyse einbezogen.
+F&uuml;r den Screening-Fragebogen muss von soscisurvey der Fragebogen "screen" heruntergeladen werden. Der Screening-Fragebogen wurde f&uuml;r `r screening[,.N]` Kinder ausgef&uuml;llt, davon sind `r screening[FINISHED == 1,.N]` Frageb&ouml;gen vollst&auml;ndig. Nur diese Frageb&ouml;gen werden in die Analyse einbezogen.
 
-# Demographische Daten 
+Für das Einlesen der Daten wird der Fragebogen XY von soscisurvey ben&ouml;tigt.
+
+<br>
+
+## Demographie 
 ```{r Demographie, results = "hide"}
   ## Geschlecht(Variable SD02), 1 = maennlich 2 = weiblich 3 = k.A.
 
   screening$SD02[screening$SD02==1] = "maennlich"
   screening$SD02[screening$SD02==2] = "weiblich"
   screening$SD02[screening$SD02==3] = "k.A."
-
-  table(screening$SD02)
   
   ## Alter (Variable SD01_01)
   screening[,SD01_01 := as.POSIXct(SD01_01,format = "%Y-%m-%d")]
@@ -95,11 +89,19 @@ Der Screeningfragebogen wurde f&uumlr `r screening[,.N]` Kinder ausgef&uumlllt, 
 
 ```
 
-Der Altersdurchschnitt ist `r screening[,round(mean(age_in_years,na.rm = TRUE),1)]` (*SD* = `r  screening[,round(sd(age_in_years, na.rm = TRUE),2)]`). 
-Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE))]` -- `r screening[,max(range(age_in_years, na.rm = TRUE))]` Jahre.
+Der Altersdurchschnitt der Stichprobe liegt bei `r screening[,round(mean(age_in_years,na.rm = TRUE),1)]` Jahren (*SD* = `r  screening[,round(sd(age_in_years, na.rm = TRUE),2)]`). <br>
+Die Altersspanne betr&auml;gt `r screening[,min(range(age_in_years, na.rm = TRUE))]` -- `r screening[,max(range(age_in_years, na.rm = TRUE))]` Jahre. <br>
+In der Stichprobe gibt es `r table(screening$SD02)[2]` M&auml;dchen und `r table(screening$SD02)[1]` Jungen. 
 
-# ERC 
-## ERC Subskalen
+<br>
+
+## ERC 
+
+Mit der **Emotion Regulation Checklist** soll die F&auml;higkeit des Kindes gemessen werden, wie es im Allgemeinen auf emotionsgeladene Situationen reagiert und sich reguliert. Die ERC hat die Subskalen: 
+
+  + Lability/Negativity und 
+  + Emotion Regulation.
+
 ```{r ERC}
   ## data.table "traits" fuer Testscores erstellen
   # Fuer Testdatenset IDs zu PID zusammenfuegen (spaetere Teilnehmer haben alle eine PID)
@@ -118,7 +120,6 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
                                          ER01_23)])]
 ```
 
-## ERC Visualisierung
 ```{r ERC_Visualsierung, warning = FALSE, message = FALSE}
   ## Histogramme
   ERC_LN_hist <- ggplot(data=traits, aes(traits$ERC_LN)) + 
@@ -152,8 +153,20 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
                                caption.color = "black")
 ```
 
-# HiPic
-## HiPic Facetten 
+<br>
+
+## HiPic
+
+Das **Hierarchical Personality Inventory for Children** ist ein Pers&ouml;lichkeitsinventar. Wir messen hier die Subskala Benevolence (Gutm&uuml;tigkeit). Wir m&ouml;chten damit herausfinden, welche "trait-compliance" die Probanden aufweisen (vor allem mit der Dimension "Compliance" / Entgegenkommen). 
+
+Die Subskalen der Skala Gutmütigkeit sind: 
+
+  + Egozentrismus (Egocentrism) 
+  + Reizbarkeit (Irritability)
+  + Entgegenkommen (Compliance)
+  + Dominanz (Dominance)
+  + Altruismus (Altruism)
+
 ```{r HiPic_Facetten}
   ## Items fuer Berechnung der Facetten invertieren (FACETKEY:13,15,16,17,23,26,31,37)
   Hipic_Facetkey <- screening[,which(names(screening)=='HP01_01'):which(names(screening)=='HP01_40')]
@@ -174,7 +187,6 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
   traits[,HiPic_B_IRR := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)=='HP01_33'):which(names(Hipic_Facetkey)=='HP01_40'))])]
 ```
 
-## HiPic Gesamtwert Benevolance
 ```{r HiPic_Gesamt}
   ## Items fuer die Berechnung invertieren (DIMENSIONKEY:13,15,16,18-22,24,25,27-30,32-36,38-40)
   Hipic_Dimensionkey <- screening[,which(names(screening)=='HP01_01'):which(names(screening)=='HP01_40')]
@@ -188,8 +200,7 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
   traits[,HiPic_Benevolance := rowSums(Hipic_Dimensionkey[,which(names(Hipic_Dimensionkey)=='HP01_01'):which(names(Hipic_Dimensionkey)=='HP01_40')])]
 ```
 
-## HiPic Visualisierung
-```{r HiPic_Visualisierung}
+```{r HiPic_Visualisierung, message = FALSE}
   ## Moeglichkeit 1: Ein Density-plot fuer alle Subskalen und ein Density-Plot fuer die Gesamtskala (Ein Density-plot eignet sich besser als ein Histogramm, da die Verteilungen fuer die einzelnen Skalen beim ueberinanderlegen besser zu erkennen sind )
   # Umwandlung von traits ins Long-format
   traits_long_H <- melt(traits,id.vars="PID",measure.vars=c("HiPic_B_ALT","HiPic_B_COM","HiPic_B_DOM","HiPic_B_EGO","HiPic_B_IRR"))
@@ -224,9 +235,12 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
     theme_bw()
 ```
 
+<br>
 
-# SRS
-## SRS Subskalen
+## SRS
+
+Mithilfe der **Social Reactivity Scale** soll die Soziale Reakivität der Probanden gemessen werden. &Uuml;berdies erm&ouml;glicht es auch ein Screening f&uuml;r autistische Z&uuml;ge. Wir fokussieren uns auf den SRS-Gesamtwert. 
+
 ```{r SRS_Subskalen}
   ## Summenwert pro Subskala berechnen
   #1. Soziale Bewusstheit (SRS_SB) Items: 2,7,25,32,45,52,54,56
@@ -245,12 +259,10 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
                                         "A403_23")])]
 ```
 
-## SRS Gesamtrohwert
 ```{r SRS_Gesamt}
   traits[,SRS_Gesamt := rowSums(screening[,which(names(screening)=='A401_01'):which(names(screening)=='A403_25')])]
 ```
 
-## SRS Visualisierung Gesamtwert
 ```{r SRS_visualisierung, message = FALSE}
   ## Einzelne Plots erstellen
   SRS_Gesamt_hist <- ggplot(data=traits, aes(traits$SRS_Gesamt)) + 
@@ -268,7 +280,13 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
                                caption.color = "black")
 ```
 
-# traits - Visualisierung mit corr.plot 
+<br>
+
+## Korrelation trait-Variablen 
+
+*Hier wird zun&auml;chst eine Korrelationsanalyse über alle trait-measures vorgenommen. Wir können dieser Stelle noch diskutieren, ob uns bestimmte Korrelationen besonders interessieren bzw. f&uuml;r eine Ver&ouml;ffentlichung interessant w&auml;ren.* 
+
+
 ```{r traits_Visualisierung}
   ## Erstellen der Korrelationsmatrix
   Cor_traits <- cor(traits[,which(names(traits)=='ERC_LN'):which(names(traits)=='SRS_Gesamt')], use = "complete.obs")
@@ -278,7 +296,12 @@ Die Altersspanne betr&oumlgt `r screening[,min(range(age_in_years, na.rm = TRUE)
   traitplot <- corrplot(Cor_traits, type = "upper", tl.cex = 0.9, tl.col = "black")
 ```
 
-# Speichern relevanter Objekte 
+<br>
+
+## RDS-Speicherung
+
+Zuletzt speichern wir die Datensets "Trais_screening" und "Traits_plots" als RDs files, um sie f&uuml;r weitere Analysen zu verwenden.
+
 ```{r Speichern}
   saveRDS(traits,"Traits_screening")
   saveRDS(traits,"Traits_plot")

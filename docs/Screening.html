@@ -360,21 +360,21 @@ div.tocify {
 </li>
 <li>
   <a href="Screening.html">
-    <span class="glyphicon glyphicon-wrench"></span>
+    <span class="glyphicon glyphicon glyphicon glyphicon-eye-open"></span>
      
     Screening
   </a>
 </li>
 <li>
   <a href="Eltern_Kind_Befragung_Roboter_Interaktion.html">
-    <span class="glyphicon glyphicon-hand-up"></span>
+    <span class="glyphicon glyphicon glyphicon glyphicon-resize-small"></span>
      
     Roboter-Kind-Interaktion
   </a>
 </li>
 <li>
-  <a href="Puls_2.html">
-    <span class="glyphicon glyphicon-user"></span>
+  <a href="Puls_Studie.html">
+    <span class="glyphicon glyphicon glyphicon glyphicon-heart-empty"></span>
      
     Mini-Puls-Studie
   </a>
@@ -404,35 +404,10 @@ div.tocify {
 </div>
 
 
-<div id="vorbereitung" class="section level1">
-<h1>Vorbereitung</h1>
-<div id="einstellungen" class="section level2">
-<h2>Einstellungen</h2>
-<pre class="r"><code>  # Benoetigte Packages laden und installieren
-  #install.packages(&quot;lubridate&quot;)
-  #install.packages(&quot;data.table&quot;)
-  #install.packages(&quot;dplyr&quot;)
-  #install.packages(&quot;ggplot2&quot;)
-  #install.packages(&quot;corrplot&quot;)
-  #install.packages(&quot;ggstatsplot&quot;)
-  #install.packages(&quot;rlang&quot;)
-  library(data.table)
-  library(lubridate)
-  library(dplyr)
-  library(ggplot2)
-  library(corrplot)
-  library(ggstatsplot)
-  library(rlang)</code></pre>
-</div>
-<div id="daten-importieren" class="section level2">
-<h2>Daten importieren</h2>
-<p>Die Datensets von dem Fragebogen Screening werden geladen.</p>
 <pre class="r"><code>  screening &lt;- read.csv(&quot;Screening.csv&quot;, sep=&quot;;&quot;, colClasses = c(STARTED = &quot;POSIXct&quot;,LASTDATA = &quot;POSIXct&quot;,SD01_01 = &quot;character&quot;))
-  # Die Variable SD01_01(Geburtsdatum) wird nicht als Datum erkannt, daher importieren wir sie zunaechst als Character und wandeln sie spaeter um.</code></pre>
-</div>
-<div id="daten-organisieren" class="section level2">
-<h2>Daten organisieren</h2>
-<pre class="r"><code>  ## Daten filtern nach beendeten Durchgaengen
+  # Die Variable SD01_01(Geburtsdatum) wird nicht als Datum erkannt, daher importieren wir sie zunaechst als Character und wandeln sie spaeter um.
+
+  ## Daten filtern nach beendeten Durchgaengen
   # fuer die Verwendung von data.table sicherstellen, dass screening data.table
   screening &lt;- as.data.table(screening)
   # Anzahl Datenreihen/Teilnehmer
@@ -442,22 +417,20 @@ div.tocify {
   # nur beendete Frageboegen verwenden
   screening &lt;- screening[FINISHED == 1]
   # nur Frageboegen mit ID-Angabe verwenden
-  screening &lt;- screening[ID01_01|ID01_02|ID01_03|ID01_04 != NA]
+  #screening &lt;- screening[ID01_01|ID01_02|ID01_03|ID01_04 != NA]
   
   ## Weitere fehlende Werte?
-  any(is.na(screening))</code></pre>
-<p>Der Screeningfragebogen wurde f&amp;uumlr 6 Kinder ausgef&amp;uumlllt, davon sind 6 Frageb&amp;oumlgen vollst&amp;aumlndig. Nur diese Frageb&amp;oumlgen werden in die Analyse einbezogen.</p>
-</div>
-</div>
-<div id="demographische-daten" class="section level1">
-<h1>Demographische Daten</h1>
+  #any(is.na(screening))</code></pre>
+<p>Für den Screening-Fragebogen muss von soscisurvey der Fragebogen “screen” heruntergeladen werden. Der Screening-Fragebogen wurde für 2 Kinder ausgefüllt, davon sind 2 Fragebögen vollständig. Nur diese Fragebögen werden in die Analyse einbezogen.</p>
+<p>Für das Einlesen der Daten wird der Fragebogen XY von soscisurvey benötigt.</p>
+<p><br></p>
+<div id="demographie" class="section level2">
+<h2>Demographie</h2>
 <pre class="r"><code>  ## Geschlecht(Variable SD02), 1 = maennlich 2 = weiblich 3 = k.A.
 
   screening$SD02[screening$SD02==1] = &quot;maennlich&quot;
   screening$SD02[screening$SD02==2] = &quot;weiblich&quot;
   screening$SD02[screening$SD02==3] = &quot;k.A.&quot;
-
-  table(screening$SD02)
   
   ## Alter (Variable SD01_01)
   screening[,SD01_01 := as.POSIXct(SD01_01,format = &quot;%Y-%m-%d&quot;)]
@@ -469,12 +442,16 @@ div.tocify {
   screening[,round(sd(age_in_years, na.rm = TRUE),2)]
   # Altersspanne
   screening[,range(age_in_years, na.rm = TRUE)]</code></pre>
-<p>Der Altersdurchschnitt ist 8.8 (<em>SD</em> = 0.64). Die Altersspanne betr&amp;oumlgt 8.2 – 9.4 Jahre.</p>
+<p>Der Altersdurchschnitt der Stichprobe liegt bei 8.3 Jahren (<em>SD</em> = 2.83). <br> Die Altersspanne beträgt 6.3 – 10.3 Jahre. <br> In der Stichprobe gibt es 1 Mädchen und 1 Jungen.</p>
+<p><br></p>
 </div>
-<div id="erc" class="section level1">
-<h1>ERC</h1>
-<div id="erc-subskalen" class="section level2">
-<h2>ERC Subskalen</h2>
+<div id="erc" class="section level2">
+<h2>ERC</h2>
+<p>Mit der <strong>Emotion Regulation Checklist</strong> soll die Fähigkeit des Kindes gemessen werden, wie es im Allgemeinen auf emotionsgeladene Situationen reagiert und sich reguliert. Die ERC hat die Subskalen:</p>
+<ul>
+<li>Lability/Negativity und</li>
+<li>Emotion Regulation.</li>
+</ul>
 <pre class="r"><code>  ## data.table &quot;traits&quot; fuer Testscores erstellen
   # Fuer Testdatenset IDs zu PID zusammenfuegen (spaetere Teilnehmer haben alle eine PID)
   screening &lt;- screening[,PID := .(paste(ID01_01, ID01_02,ID01_03,ID01_04, sep = &quot;&quot;))]
@@ -490,9 +467,6 @@ div.tocify {
   ## Emotion Regulation (Items: 1,3,7,15,16,18,21,23)
   traits[,ERC_EmoReg := rowSums(screening[,.(ER01_01,ER01_03,ER01_07,ER01_15,ER01_16, ER01_18, ER01_21,
                                          ER01_23)])]</code></pre>
-</div>
-<div id="erc-visualisierung" class="section level2">
-<h2>ERC Visualisierung</h2>
 <pre class="r"><code>  ## Histogramme
   ERC_LN_hist &lt;- ggplot(data=traits, aes(traits$ERC_LN)) + 
     geom_histogram() +
@@ -525,12 +499,19 @@ div.tocify {
                                 title.text = &quot;ERC Emotion Regulation&quot;,
                                caption.color = &quot;black&quot;)</code></pre>
 <p><img src="Screening_files/figure-html/ERC_Visualsierung-2.png" width="672" /></p>
+<p><br></p>
 </div>
-</div>
-<div id="hipic" class="section level1">
-<h1>HiPic</h1>
-<div id="hipic-facetten" class="section level2">
-<h2>HiPic Facetten</h2>
+<div id="hipic" class="section level2">
+<h2>HiPic</h2>
+<p>Das <strong>Hierarchical Personality Inventory for Children</strong> ist ein Persölichkeitsinventar. Wir messen hier die Subskala Benevolence (Gutmütigkeit). Wir möchten damit herausfinden, welche “trait-compliance” die Probanden aufweisen (vor allem mit der Dimension “Compliance” / Entgegenkommen).</p>
+<p>Die Subskalen der Skala Gutmütigkeit sind:</p>
+<ul>
+<li>Egozentrismus (Egocentrism)</li>
+<li>Reizbarkeit (Irritability)</li>
+<li>Entgegenkommen (Compliance)</li>
+<li>Dominanz (Dominance)</li>
+<li>Altruismus (Altruism)</li>
+</ul>
 <pre class="r"><code>  ## Items fuer Berechnung der Facetten invertieren (FACETKEY:13,15,16,17,23,26,31,37)
   Hipic_Facetkey &lt;- screening[,which(names(screening)==&#39;HP01_01&#39;):which(names(screening)==&#39;HP01_40&#39;)]
   facet_itemsreverse &lt;- c(&quot;HP01_13&quot;,&quot;HP01_15&quot;, &quot;HP01_16&quot;, &quot;HP01_17&quot;, &quot;HP01_23&quot;, &quot;HP01_26&quot;, &quot;HP01_31&quot;, &quot;HP01_37&quot;)
@@ -548,9 +529,6 @@ div.tocify {
   traits[,HiPic_B_EGO := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_25&#39;):which(names(Hipic_Facetkey)==&#39;HP01_32&#39;))])]
   # 5. Reizbarkeit/Irritability (B_IRR) (8 Items)
   traits[,HiPic_B_IRR := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)==&#39;HP01_33&#39;):which(names(Hipic_Facetkey)==&#39;HP01_40&#39;))])]</code></pre>
-</div>
-<div id="hipic-gesamtwert-benevolance" class="section level2">
-<h2>HiPic Gesamtwert Benevolance</h2>
 <pre class="r"><code>  ## Items fuer die Berechnung invertieren (DIMENSIONKEY:13,15,16,18-22,24,25,27-30,32-36,38-40)
   Hipic_Dimensionkey &lt;- screening[,which(names(screening)==&#39;HP01_01&#39;):which(names(screening)==&#39;HP01_40&#39;)]
   dimension_itemsreverse &lt;- c(&quot;HP01_13&quot;,&quot;HP01_15&quot;, &quot;HP01_16&quot;, &quot;HP01_18&quot;, &quot;HP01_19&quot;, &quot;HP01_20&quot;, &quot;HP01_21&quot;, &quot;HP01_22&quot;,
@@ -561,9 +539,6 @@ div.tocify {
   
   ## Gesamtwert Gutmuetigekeit/Benevolance berechnen
   traits[,HiPic_Benevolance := rowSums(Hipic_Dimensionkey[,which(names(Hipic_Dimensionkey)==&#39;HP01_01&#39;):which(names(Hipic_Dimensionkey)==&#39;HP01_40&#39;)])]</code></pre>
-</div>
-<div id="hipic-visualisierung" class="section level2">
-<h2>HiPic Visualisierung</h2>
 <pre class="r"><code>  ## Moeglichkeit 1: Ein Density-plot fuer alle Subskalen und ein Density-Plot fuer die Gesamtskala (Ein Density-plot eignet sich besser als ein Histogramm, da die Verteilungen fuer die einzelnen Skalen beim ueberinanderlegen besser zu erkennen sind )
   # Umwandlung von traits ins Long-format
   traits_long_H &lt;- melt(traits,id.vars=&quot;PID&quot;,measure.vars=c(&quot;HiPic_B_ALT&quot;,&quot;HiPic_B_COM&quot;,&quot;HiPic_B_DOM&quot;,&quot;HiPic_B_EGO&quot;,&quot;HiPic_B_IRR&quot;))
@@ -596,14 +571,12 @@ div.tocify {
     facet_wrap(~variable, scale = &quot;free&quot;, labeller = as_labeller(c(&quot;HiPic_B_ALT&quot;=&quot;Altruismus&quot;, &quot;HiPic_B_COM&quot; = &quot;Compliance&quot;,&quot;HiPic_B_DOM&quot; = &quot;Dominanz&quot;,&quot;HiPic_B_EGO&quot; = &quot;Egoismus&quot;,&quot;HiPic_B_IRR&quot; = &quot;Reizbarkeit&quot;, &quot;HiPic_Benevolance&quot; = &quot;Gesamtwert&quot;))) +
     labs(title = &quot;HiPic&quot;, x = NULL, y = NULL) +
     theme_bw()</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="Screening_files/figure-html/HiPic_Visualisierung-2.png" width="672" /></p>
+<p><br></p>
 </div>
-</div>
-<div id="srs" class="section level1">
-<h1>SRS</h1>
-<div id="srs-subskalen" class="section level2">
-<h2>SRS Subskalen</h2>
+<div id="srs" class="section level2">
+<h2>SRS</h2>
+<p>Mithilfe der <strong>Social Reactivity Scale</strong> soll die Soziale Reakivität der Probanden gemessen werden. Überdies ermöglicht es auch ein Screening für autistische Züge. Wir fokussieren uns auf den SRS-Gesamtwert.</p>
 <pre class="r"><code>  ## Summenwert pro Subskala berechnen
   #1. Soziale Bewusstheit (SRS_SB) Items: 2,7,25,32,45,52,54,56
   traits[,SRS_SB := rowSums(screening[,c(&quot;A401_02&quot;,&quot;A401_07&quot;, &quot;A402_05&quot;, &quot;A402_12&quot;, &quot;A403_05&quot;,&quot;A403_12&quot;, &quot;A403_14&quot;, &quot;A403_16&quot;)])]
@@ -619,13 +592,7 @@ div.tocify {
   #5. Autistische Manierismen (SRS_AM) Items: 4,8,14,20,24,28,29,31,39,49,50,63
   traits[,SRS_AM :=rowSums(screening[,c(&quot;A401_04&quot;,&quot;A401_08&quot;,&quot;A401_14&quot;,&quot;A401_20&quot;,&quot;A402_04&quot;,&quot;A402_08&quot;,&quot;A402_09&quot;,&quot;A402_11&quot;,&quot;A402_19&quot;,&quot;A403_09&quot;,&quot;A403_10&quot;,
                                         &quot;A403_23&quot;)])]</code></pre>
-</div>
-<div id="srs-gesamtrohwert" class="section level2">
-<h2>SRS Gesamtrohwert</h2>
 <pre class="r"><code>  traits[,SRS_Gesamt := rowSums(screening[,which(names(screening)==&#39;A401_01&#39;):which(names(screening)==&#39;A403_25&#39;)])]</code></pre>
-</div>
-<div id="srs-visualisierung-gesamtwert" class="section level2">
-<h2>SRS Visualisierung Gesamtwert</h2>
 <pre class="r"><code>  ## Einzelne Plots erstellen
   SRS_Gesamt_hist &lt;- ggplot(data=traits, aes(traits$SRS_Gesamt)) + 
     geom_histogram() +
@@ -641,10 +608,11 @@ div.tocify {
                                labels = c(&quot;A&quot;, &quot;B&quot;),
                                caption.color = &quot;black&quot;)</code></pre>
 <p><img src="Screening_files/figure-html/SRS_visualisierung-1.png" width="672" /></p>
+<p><br></p>
 </div>
-</div>
-<div id="traits---visualisierung-mit-corr.plot" class="section level1">
-<h1>traits - Visualisierung mit corr.plot</h1>
+<div id="korrelation-trait-variablen" class="section level2">
+<h2>Korrelation trait-Variablen</h2>
+<p><em>Hier wird zunächst eine Korrelationsanalyse über alle trait-measures vorgenommen. Wir können dieser Stelle noch diskutieren, ob uns bestimmte Korrelationen besonders interessieren bzw. für eine Veröffentlichung interessant wären.</em></p>
 <pre class="r"><code>  ## Erstellen der Korrelationsmatrix
   Cor_traits &lt;- cor(traits[,which(names(traits)==&#39;ERC_LN&#39;):which(names(traits)==&#39;SRS_Gesamt&#39;)], use = &quot;complete.obs&quot;)
 
@@ -652,9 +620,11 @@ div.tocify {
   # naeher spezifiziert: Schriftgroeße und Farbe der Variablennamen
   traitplot &lt;- corrplot(Cor_traits, type = &quot;upper&quot;, tl.cex = 0.9, tl.col = &quot;black&quot;)</code></pre>
 <p><img src="Screening_files/figure-html/traits_Visualisierung-1.png" width="672" /></p>
+<p><br></p>
 </div>
-<div id="speichern-relevanter-objekte" class="section level1">
-<h1>Speichern relevanter Objekte</h1>
+<div id="rds-speicherung" class="section level2">
+<h2>RDS-Speicherung</h2>
+<p>Zuletzt speichern wir die Datensets “Trais_screening” und “Traits_plots” als RDs files, um sie für weitere Analysen zu verwenden.</p>
 <pre class="r"><code>  saveRDS(traits,&quot;Traits_screening&quot;)
   saveRDS(traits,&quot;Traits_plot&quot;)</code></pre>
 </div>
@@ -710,7 +680,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3,h4",
+      selectors: "h1,h2",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
