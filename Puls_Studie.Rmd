@@ -7,9 +7,9 @@ output:
     toc_float: true
     toc_depth: 4
 ---
-# Vorbereitung
-## Einstellungen
-```{r setup, include = FALSE}
+
+
+```{r Setup / Packages, include = FALSE}
 #warning = FALSE
 ## Einstellungen rmark_down
 # Generell
@@ -21,10 +21,9 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ## Environment leeren
   rm(list = ls())
-```
+  
 
-## Benoetigte Packages installieren und laden 
-```{r Packages,message = FALSE, warning = FALSE}
+## Packages 
   #install.packages("data.table")
   #install.packages("dplyr")
   #install.packages("ggplot2")
@@ -45,33 +44,39 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
   library(afex)
 ```
 
+
+In der Mini-Puls-Studie werden vier Videosequenzen mit unterschiedlicher Valenz und unterschiedlichem Arousal pr&auml;sentiert. Die Abk&uuml;rzungen daf&uuml;r sind in diesem Skript:
+
+  + lVal_lAro = Filmausschnitt mit negative valence / low arousal
+  + hVal_lAro = Filmausschnitt mit positive valence / low arousal 
+  + lVal_hAro = Filmausschnitt mit negative valence / high arousal 
+  + hVal_hAro = Filmausschnitt mit positive valence / high arousal 
+  
+<br>  
+
 ## Daten importieren 
 
-Daten von soscisurvey von Puls_Fragebogen und Puls_Stimuli importieren.
+Die Daten von soscisurvey von "Puls_Fragebogen" und "Puls_Stimuli" importieren.
 
-```{r Import}
+```{r Import / Organisieren, results = "hide"}
 ## csv.-Datei einlesen
-  ds <- read.csv("puls_data_neu.csv",encoding = "UTF-8",header = TRUE,sep = ";",dec = ",",
+  ds <- read.csv("Puls_Studie.csv",encoding = "UTF-8",header = TRUE,sep = ";",dec = ",",
     row.names = "CASE",as.is = TRUE,check.names = TRUE, fill = TRUE, strip.white = TRUE)
-```
 
-## Daten organisieren 
-```{r Organisation}
-  ## Welche VPn/IDs haben den Fragebogen ausgefuellt?
+
+## Welche VPn/IDs haben den Fragebogen ausgefuellt?
   ds <- as.data.table(ds)
   ds[,unique(PID)]
   
-  ## Nur die Daten der Kinder der Pilotstudie behalten
-  ds <- ds[PID %in% c("m1110", "j0405", "l1803")]
+## Wenn wir die Daten aus der Pilotstudie vom 06.03.2020 analysieren moechten:
+ # ds <- ds[PID %in% c("m1110", "j0405", "l1803")]
   # Wir haben noch 16 Datenreihen: Wer hat eine Datenreihe zu viel?
-  ds[, .(.N),by = PID]# PID j0405
+  #ds[, .(.N),by = PID]# PID j0405
   # Die Datenreihe ohne Zeitangaben (mit der Filmreihenfolge 1423) loeschen
-  ds <- ds[PID == "j0405" & FF03 == "1423" |is.na(FF03)== TRUE | PID == "m1110" | PID == "l1803"]
+  #ds <- ds[PID == "j0405" & FF03 == "1423" |is.na(FF03)== TRUE | PID == "m1110" | PID == "l1803"]
 ```
 
-## Wide-format (Filmfragebogen und Puls_stimuli)
-
-Achtung: Das Umwandeln der Daten ins Wide-format setzt voraus, dass jede ID genau 5 Datenreihen hat (4 x Filmfragebogen, 1 x Pulsfragebogen).Dies haben wir im vorigen Schritt kontrolliert. Weitere fehlende Werte werden erst nach der Umwandlung ins Wide-fromat vorgenommen.
+Achtung: Das Umwandeln der Daten ins Wide-format setzt voraus, dass jede ID genau 5 Datenreihen hat (4 x Filmfragebogen, 1 x Pulsfragebogen). Dies haben wir im vorigen Schritt kontrolliert. Weitere fehlende Werte werden erst nach der Umwandlung ins Wide-fromat vorgenommen.
 
 ```{r Zusammenfuegen }
   ## Benoetigte Objekte/Data.frames
@@ -112,24 +117,22 @@ Achtung: Das Umwandeln der Daten ins Wide-format setzt voraus, dass jede ID gena
     all <- rbind(all, p)}
 ```
 
-## Fehlende Werte 
-
 Folgende Tabelle zeigt, wo sich fehlende Werte in den f&uuml;r uns relevanten Variablen befinden. Das Kind mit der ID j0405 hat einen Film nicht/nicht vollst&auml;ndig bearbeitet. Zwei Kinder (ID j0405 und ID m1110) haben f&uuml;r jeweils einen Film kein konkretes Gef&uuml;hl angegeben.
 
 ```{r Fehlende Werte}
   ## NAs in den fuer uns relevanten Spalten 
-  all <- as.data.table(all)
-  all[is.na(F_KNOWN) == TRUE| is.na(F_EMOTION) == TRUE|is.na(F_VALENZ) == TRUE|is.na(F_AROUSAL) == 
-  TRUE,.(PID,FILM,F_KNOWN,F_EMOTION,F_VALENZ,F_AROUSAL,FINISHED)]
+  #all <- as.data.table(all)
+  #all[is.na(F_KNOWN) == TRUE| is.na(F_EMOTION) == TRUE|is.na(F_VALENZ) == TRUE|is.na(F_AROUSAL) == 
+  #TRUE,.(PID,FILM,F_KNOWN,F_EMOTION,F_VALENZ,F_AROUSAL,FINISHED)]
   
   ## nur beendete Frageboegen verwenden
   # wir nehmen die Datenreihe von PID j0405 fuer den Film hVal_hAro raus
-  all <- all[!(PID == "j0405" & FILM == "hVal_hAro")]
+  # all <- all[!(PID == "j0405" & FILM == "hVal_hAro")]
 ```
 
-#  Film bekannt/unbekannt 
+##  Film bekannt/unbekannt 
 
-Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film kannten.
+Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film kannten:
 
 ```{r Film_bekannt}
 ## (Variable F_KNOWN) 1 = bekannt, 2 = unbekannt
@@ -139,12 +142,24 @@ Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film ka
   table(all$F_KNOWN, all$FILM)
 ```
 
-# Valenz und Arousal pro Film
+<br>
+
+## Valenz- und Arousal-Ratings
+
+<br>
+
+Für die Einsch&auml;tzung der Filmausschnitte wurde der **Affective Slider** einmal f&uuml;r Arousal und einmal f&uuml;r genutzt:
+
 **Wie f&uuml;hlst du dich?**
 ![](Slider_Valenz.png)
 
 **Wie aufgeregt bist du?**
 ![](Slider_Arousal.png)
+
+<br>
+
+Hier ist die Tabelle mit den Zahlenwerten zur Einsch&auml;tzung:
+
 
 ```{r Valenz&Arousal}
   # Valenz ("Wie fuehlst du dich?") (1/traurig - 101/froehlich) (Variable F_VALENZ)
@@ -153,9 +168,10 @@ Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film ka
   states
 ```
 
-## Visualisierung Valenz und Arousal
 
-```{r}
+Und hier die grafische Darstellung: 
+
+```{r Valenz&Arousal_Visualisierung}
   ## Daten fuer die bessere Verwendung von ggplot2 in Long-format bringen
   all_long <- melt(all,id.vars="FILM", measure.vars=c("F_AROUSAL","F_VALENZ"))
 
@@ -163,9 +179,9 @@ Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film ka
   ValAr_boxplot <- ggplot(data = all_long) + 
     geom_boxplot(aes(x = FILM, y = value, fill = variable)) +
     labs( title = "Boxplot", x = "Film", y = "Valenz/Arousal") + 
-    scale_x_discrete(labels = c("hVal_hAro" = "hohe Valenz\nhoher Arousal",
-    "hVal_lAro" = "hohe Valenz\nniedriger Arousal","lVal_hAro" = "niedrige Valenz\nhoher Arousal",
-    "lVal_lAro" = "niedrige Valenz\nniedriger Arousal")) +
+    scale_x_discrete(labels = c("hVal_hAro" = "hohe Valenz\nhohes Arousal",
+    "hVal_lAro" = "hohe Valenz\nniedriges Arousal","lVal_hAro" = "niedrige Valenz\nhohes Arousal",
+    "lVal_lAro" = "niedrige Valenz\nniedriges Arousal")) +
     coord_flip() + 
     theme_bw() +
     theme(legend.position = "bottom", legend.title = element_blank())
@@ -179,9 +195,9 @@ Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film ka
                               ymin = value + sd, ymax = value - sd)) + 
     geom_pointrange(position = position_dodge(0.5)) +
     labs( title = "Mittelwerte", x = "Film", y = "Valenz/Arousal") + 
-    scale_x_discrete(labels = c("hVal_hAro" = "hohe Valenz\nhoher Arousal",
-    "hVal_lAro" = "hohe Valenz\nniedriger Arousal","lVal_hAro" = "niedrige Valenz\nhoher Arousal",
-    "lVal_lAro" = "niedrige Valenz\nniedriger Arousal")) +
+    scale_x_discrete(labels = c("hVal_hAro" = "hohe Valenz\nhohes Arousal",
+    "hVal_lAro" = "hohe Valenz\nniedriges Arousal","lVal_hAro" = "niedrige Valenz\nhohes Arousal",
+    "lVal_lAro" = "niedrige Valenz\nniedriges Arousal")) +
     coord_flip() +
     theme_bw()+
     theme(legend.position = "bottom", legend.title = element_blank())
@@ -191,16 +207,27 @@ Die folgende Tabelle zeigt pro Film an, wie viele Kindern den jeweiligen Film ka
   combine_plots(ValAr_boxplot, ValAr_mwert, ncol = 2, nrow=1,labels = c("A", "B"), common.legend = TRUE, caption.color = "black")
 ```
 
-## ANOVA 
+<br>
+
+## Statistik 
+
+Hier haben wir bereits die Statistik vorbereitet. Gerechnet werden soll eine repeated-measures ANOVA mit Arousal / Valenz als within factors. Die abhängige Variable ist das Rating der Probanden. 
+
+<br>
+
 ### Normalverteilung der abhaengigen Variablen (Valenz & Aufregung) testen
-```{r}
+```{r NV_testen}
   shapiro.test(all$F_VALENZ)
   shapiro.test(all$F_AROUSAL)
 ```
 
-### ANOVA durchfuehren
+<br>
+
+### ANOVA 
+
 Die ANOVA testet auch auf Sph&auml;rizit&auml;t, kann aber noch nicht komplett durchgef&uuml;hrt werden, da wir fehlende Werte haben (s.o.)
-```{r}
+
+```{r ANOVA_rechnen}
   # PID in Faktor umwandeln
   all$PID <- as.factor(all$PID)
   # ANOVA durchfuehren
@@ -210,9 +237,11 @@ Die ANOVA testet auch auf Sph&auml;rizit&auml;t, kann aber noch nicht komplett d
   summary(result_anova_arousal)
 ```
 
-# Konkrete Gefuehle pro Film
+<br>
 
-Die folgende Tabelle zeigt pro Film an, wie viele Kinder welches Gef&uuml;hl gew&auml;hlt haben.
+## Konkrete Gefuehle angeben
+
+Die folgende Tabelle zeigt pro Film an, wie viele Kinder welches Gef&uuml;hl gew&auml;hlt haben:
 
 ```{r}
 ##Welches Gefuehl? (1 = Wuetend, 2 = Ueberrascht, 3 = Traurig, 4 = Aengstlich, 5 = Froehlich, -1 = kein Gefuehl)

@@ -8,14 +8,14 @@ navbar:
       icon: glyphicon-info-sign
       href: index.html
     - text: "Screening"
-      icon: glyphicon-wrench
+      icon: glyphicon glyphicon-eye-open
       href: Screening.html
     - text: "Roboter-Kind-Interaktion"
-      icon: glyphicon-hand-up
+      icon: glyphicon glyphicon-resize-small
       href: Eltern_Kind_Befragung_Roboter_Interaktion.html
     - text: "Mini-Puls-Studie"
-      icon: glyphicon-user
-      href: Puls_2.html
+      icon: glyphicon glyphicon-heart-empty
+      href: Puls_Studie.html
 output:
   html_document
       

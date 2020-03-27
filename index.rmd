@@ -1,5 +1,5 @@
 ---
-title: "General information"
+title: "Informationen zu den Daten"
 output: 
   html_document:
     css: styles.css
@@ -8,14 +8,24 @@ output:
 
 ```{r setup, include=FALSE, message = FALSE, warning = FALSE}
 
-# Set general settings for Markdown file 
+# Setze Knit-Optionen
   knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
-
-# Swipe environment
+# Environment saeubern 
   rm(list=ls())
   
-
 ```
 
-Test
+Im Rahmen des ERIK-Projekts wird eine Studie zur Roboter-Kind-Interaktion durchgeführt. Nachfolgend eine &Uuml;bersicht zu den erhobenen Variablen und RDS files, in denen sie zu finden sind: 
+
+## Datenset Screening
+
+*Hier folgen noch Tabellen, die die Variablen der Datensets erkl&auml;ren.*
+
+## Datenset Roboter-Kind-Interaktion
+
+*Hier folgen noch Tabellen, die die Variablen der Datensets erkl&auml;ren.*
+
+## Datenset Mini-Puls-Studie
+
+*Hier folgen noch Tabellen, die die Variablen der Datensets erkl&auml;ren.*

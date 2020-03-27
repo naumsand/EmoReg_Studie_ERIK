@@ -360,21 +360,21 @@ div.tocify {
 </li>
 <li>
   <a href="Screening.html">
-    <span class="glyphicon glyphicon-wrench"></span>
+    <span class="glyphicon glyphicon glyphicon glyphicon-eye-open"></span>
      
     Screening
   </a>
 </li>
 <li>
   <a href="Eltern_Kind_Befragung_Roboter_Interaktion.html">
-    <span class="glyphicon glyphicon-hand-up"></span>
+    <span class="glyphicon glyphicon glyphicon glyphicon-resize-small"></span>
      
     Roboter-Kind-Interaktion
   </a>
 </li>
 <li>
-  <a href="Puls_2.html">
-    <span class="glyphicon glyphicon-user"></span>
+  <a href="Puls_Studie.html">
+    <span class="glyphicon glyphicon glyphicon glyphicon-heart-empty"></span>
      
     Mini-Puls-Studie
   </a>
@@ -405,11 +405,10 @@ div.tocify {
 
 
 <hr />
-<div id="vorbereitung" class="section level3">
-<h3>Vorbereitung</h3>
-<p>Zunächst werden die Datensets “Kinder_full”, “Eltern_full” und “Eltern_Uebung” geladen und überprüft, wie viele Probanden gemessen wurden und wie die Verteilung auf die Gruppen (Avatar vs Roboter) aussieht.</p>
+<div id="vorbereitung" class="section level2">
+<h2>Vorbereitung</h2>
 <pre class="r"><code># Importiere CSV Datei mit UTF-8 encoding, Spaltentrenner ; und Dezimalzeichen ,
-ds = read.csv(&quot;Eltern_Kids_full_uebung.csv&quot;, encoding = &quot;UTF-8&quot;,header = TRUE,sep = &quot;;&quot;,dec = &quot;,&quot;,
+ds = read.csv(&quot;Eltern_Kind_Befragung_Roboter_Interaktion.csv&quot;, encoding = &quot;UTF-8&quot;,header = TRUE,sep = &quot;;&quot;,dec = &quot;,&quot;,
     row.names = &quot;CASE&quot;,as.is = TRUE,check.names = TRUE, fill = TRUE, strip.white = TRUE)
 
 # Lade Screening Datenset fuer Information zu Alter / Geschlecht
@@ -423,8 +422,9 @@ ds &lt;- merge(ds,screen, all = T)
 ds_uebung = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Eltern_Uebung&#39;)
 ds_uebung &lt;- as.data.table(ds_uebung)
 ds_uebung[,EXC_NR := as.factor(EXC_NR)]
+
 # Zunaechst nur die Daten der ID &quot;testtest&quot; verwenden
-ds_uebung &lt;- ds_uebung[PID == &quot;testtest&quot;,]
+#ds_uebung &lt;- ds_uebung[PID == &quot;testtest&quot;,]
 
 # Eltern_full, kids_full
 ds = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Eltern_full&#39; | QUESTNNR==&#39;Kinder_full&#39;)
@@ -437,25 +437,26 @@ ds = ds %&gt;% dplyr::filter(ID03 == &quot;1&quot; | ID03 == &quot;2&quot;)
 
 # Zeige Anzahl der TeilnehmerInnen
 show(paste(&quot;Anzahl Kinder:&quot;, length(unique(ds$PID))))</code></pre>
-<pre><code>## [1] &quot;Anzahl Kinder: 18&quot;</code></pre>
+<pre><code>## [1] &quot;Anzahl Kinder: 6&quot;</code></pre>
+<p>Zunächst werden die Datensets “Kinder_full”, “Eltern_full” und “Eltern_Uebung” aus soscisurvey geladen und überprüft, wie viele Probanden gemessen wurden und wie die Verteilung auf die Gruppen (Avatar vs Roboter) aussieht.</p>
 <pre class="r"><code># Dieser Faktor gibt an, ob der Teilnehmer mit Roboter oder Tablet interagierte
-ds$TABLET_ROBOT = factor(
-  ds$ID03,
+
+ds_robbie = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Kinder_full&#39;)
+
+ds_robbie$TABLET_ROBOT = factor(
+  ds_robbie$ID03,
   levels = c(&quot;1&quot;, &quot;2&quot;),
   labels = c(&quot;Roboter&quot;, &quot;Avatar&quot;),
   ordered = FALSE
 )
-summary(ds$TABLET_ROBOT)</code></pre>
+summary(ds_robbie$TABLET_ROBOT)</code></pre>
 <pre><code>## Roboter  Avatar 
-##      28      11</code></pre>
+##       3       3</code></pre>
 <pre class="r"><code># Waehle Kinder-Fragebogen aus
   ds_kind = ds %&gt;% dplyr::filter(QUESTNNR==&#39;Kinder_full&#39;) %&gt;%
   
 # Nur abgeschlossene Eintraege beruecksichtigen (FINISHED sollte Wert 1 haben)
   dplyr::filter(as.logical(FINISHED))
-
-# Nur Frageboegen mit PID berücksichtigen
-  ds_kind &lt;- ds_kind[-which(ds_kind$PID ==&quot;&quot;),]
 
 # Master-Table fuer Kind-Fragebogen Roboter-Interaktion
   int_kind = data.frame(ds_kind$PID)
@@ -482,8 +483,9 @@ summary(ds$TABLET_ROBOT)</code></pre>
   int_eltern$group [int_eltern$group  == 2] = &quot;Avatar&quot;</code></pre>
 <p><br></p>
 </div>
-<div id="vor-der-interaktion" class="section level3">
-<h3>Vor der Interaktion</h3>
+<div id="vor-der-interaktion" class="section level2">
+<h2>Vor der Interaktion</h2>
+<p><br></p>
 <p><strong>Hast du schon einmal mit einem Roboter gespielt?</strong></p>
 <pre class="r"><code># reference: https://strengejacke.github.io/sjPlot/reference/plot_likert.html
 
@@ -502,17 +504,37 @@ summary(ds$TABLET_ROBOT)</code></pre>
 # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_er, catcount = 2)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/roboter_kennen-1.png" width="672" /></p>
-<p><strong>Wie aufgeregt bist du? &amp; Wie f&amp;uumlhlst du dich?</strong></p>
+<p><br></p>
+<p><strong>Wie aufgeregt bist du? / Wie fühlst du dich?</strong></p>
+<p>Hier werden die Probanden mithilfe eines <strong>Affective Sliders</strong> gefragt, wie aufgeregt sie sind und wie sie sich fühlen: <br></p>
+<p><strong>Slider Valenz:</strong></p>
+<div class="figure">
+<img src="Slider_Valenz.png" />
+
+</div>
+<p><br></p>
+<p><strong>Slider Arousal</strong></p>
+<div class="figure">
+<img src="Slider_Arousal.png" />
+
+</div>
+<p><br></p>
 <pre class="r"><code>  ## Variable F_AROUSAL und F_VALENZ
   ds_kind &lt;- as.data.table(ds_kind)
   ds_kind[,.(Mittelwert_Arousal = round(mean(F_AROUSAL,na.rm = TRUE),2),Mittelwert_Valenz = round(mean(F_VALENZ,na.rm = TRUE),2))]</code></pre>
 <pre><code>##    Mittelwert_Arousal Mittelwert_Valenz
-## 1:               36.5                57</code></pre>
+## 1:              39.83             78.67</code></pre>
 <pre class="r"><code>  ds_kind &lt;- as.data.frame(ds_kind)</code></pre>
 </div>
-<div id="persönlichkeit-robbie" class="section level3">
-<h3>Persönlichkeit Robbie</h3>
-<p>Hier werden semantische Differentiale auf einer Spanne von 1 bis 101 bewertet. Die Wertungen koennen auch zu drei Skalen zusammengefasst werden.</p>
+<div id="persönlichkeit-robbie" class="section level2">
+<h2>Persönlichkeit Robbie</h2>
+<p>Zur Einschätzung von Robbies Persönlichkeit arbeiten wir mit Items der <strong>Godspeed-Skala</strong> mit den Subskalen:</p>
+<ul>
+<li>Sympathie</li>
+<li>Intelligenz und</li>
+<li>Antropomorphismus.</li>
+</ul>
+<p>Die mit Nummern gekennzeichneten Items “GDSPD” stellen die Einzelitems dar, die darunter zu den Skalen zusammengefasst wurden. <strong>Abbildung A</strong> zeigt die Einschätzung von Robbies Persönlichkeit beim Roboter und <strong>Abbildung B</strong> beim Avatar.</p>
 <pre class="r"><code># Berechnen der Skalenwerte von Mittelwerten der dazugehoerigen Items
   ds_kind$GDSPD_ANTHROMORPHISM = rowMeans(ds_kind[c(&quot;GDSPD01&quot;, &quot;GDSPD02&quot;, &quot;GDSPD03&quot;, &quot;GDSPD04&quot;)], na.rm = T)
   ds_kind$GDSPD_LIKABILITY = rowMeans(ds_kind[c(&quot;GDSPD05&quot;, &quot;GDSPD06&quot;, &quot;GDSPD07&quot;, &quot;GDSPD08&quot;)], na.rm = T)
@@ -662,52 +684,96 @@ summary(ds$TABLET_ROBOT)</code></pre>
                                caption.color = &quot;black&quot;)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Eltern_Godspeed_Violin-1.png" width="672" /></p>
 <p><br></p>
-</div>
-<div id="beziehung-zu-robbie" class="section level3">
-<h3>Beziehung zu Robbie</h3>
+<p><em>Wir könnten an dieser Stelle statistische Vergleiche rechnen, ob Kinder / Eltern Robbie menschlicher / netter / klüger als Roboter im Vergleich zum Avatar fanden.</em></p>
 <p><br></p>
-<div id="integration-of-others-in-the-self-ios" class="section level4">
-<h4>Integration of Others in the Self (IOS)</h4>
-<p>Mittels eines Venn-Diagramms in drei Stufen von Nähe haben die Kinder ihre gefühlte Nähe zum Roboter bewertet. Die Grafiken zeigten entweder einen Jungen oder ein Mädchen als Avatar des Kindes.</p>
-<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/pics_game1-1.png" width="50%" /></p>
-<pre class="r"><code># Es gibt zwei Versionen des IOS (fuer Maedchen vs Jungen)in SocsciSurvey.
-# Fuer jedes Kind existiert aber hoechstens ein Rating, weshalb das Rating fuer IOS_F uebernommen wird, 
-# falls IOS_M keinen Wert enthaelt.
-# 
-# 
-# int_kind$IOS = recode(ds_kind$IOS_M, .missing = ds_kind$IOS_F)
-# 
-# int_kind$IOS = factor(
-#   int_kind$IOS,
-#   levels = c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;),
-#   labels = c(&quot;Gar nicht nah&quot;, &quot;Mittelmaessig nah&quot;, &quot;sehr nah&quot;),
-#   ordered = TRUE
-# )
-# 
-# # Trenne nach Avatar / Roboter Gruppe
-#   robot_int_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
-#   avatar_int_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
-#   
-# # Waehle nur dieses Item aus  
-#   robot_int_kind = as_tibble(robot_int_kind)
-#   robot_int_ios = robot_int_kind %&gt;% dplyr::select(IOS)
-#   
-#   avatar_int_kind = as_tibble(avatar_int_kind)
-#   avatar_int_ios = avatar_int_kind %&gt;% dplyr::select(IOS)
-#   
-# # Kombiniere Daten von Roboter- und Avatar-Einschaetzung  
-# # Problem: Die Dataframes haben eine untersch. Laenge
-#   comb_int_use = merge(robot_int_ios,avatar_int_ios, by = &quot;row.names&quot;, all = T, suffixes = c(&quot;&quot;,&quot;&quot;))
-#   comb_int_use$Row.names &lt;- NULL
-#   
-# # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
-#   plot_likert(comb_int_use, catcount = 3,  wrap.legend.labels = 10, values = FALSE,
-#                 c(rep(&quot;A: Einschaetzung Roboter&quot;, 1), rep(&quot;B: Einschaetzung Avatar&quot;, 1)),
-#                 geom.colors = c(&quot;#B34954&quot;,&quot;#FFFCA6&quot;,&quot;#5292B3&quot;),
-#                 rel_heights = c(6, 8))</code></pre>
 </div>
-<div id="beziehungsqualität" class="section level4">
-<h4>Beziehungsqualität</h4>
+<div id="beziehung-zu-robbie" class="section level2">
+<h2>Beziehung zu Robbie</h2>
+<p><br></p>
+<div id="integration-of-others-in-the-self-ios" class="section level3">
+<h3>Integration of Others in the Self (IOS)</h3>
+<p>Mittels eines Venn-Diagramms haben die Probanden ihre gefühlte Nähe zu Robbie mithilfe der <strong>IOS-Skala</strong> bewertet. Die Grafiken zeigten entweder einen Jungen oder ein Mädchen als Avatar des Probanden:</p>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/IOS_Bild-1.png" width="50%" /></p>
+<pre class="r"><code># Es gibt zwei Versionen des IOS (fuer Maedchen vs Jungen)in SocsciSurvey.
+# Fuer jedes Kind existiert aber hoechstens ein Rating, weshalb das Rating fuer IOS_F uebernommen wird,
+# falls IOS_M keinen Wert enthaelt.
+
+
+int_kind$IOS = recode(ds_kind$IOS_M, .missing = ds_kind$IOS_F)
+
+int_kind$IOS = factor(
+  int_kind$IOS,
+  levels = c(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;),
+  labels = c(&quot;Gar nicht nah&quot;, &quot;Mittelmaessig nah&quot;, &quot;sehr nah&quot;),
+  ordered = TRUE
+)
+
+# Trenne nach Avatar / Roboter Gruppe
+  robot_int_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
+  avatar_int_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
+
+# Waehle nur dieses Item aus
+  robot_int_kind = as_tibble(robot_int_kind)
+  robot_int_ios = robot_int_kind %&gt;% dplyr::select(IOS)
+
+  avatar_int_kind = as_tibble(avatar_int_kind)
+  avatar_int_ios = avatar_int_kind %&gt;% dplyr::select(IOS)
+
+# Kombiniere Daten von Roboter- und Avatar-Einschaetzung
+# Problem: Die Dataframes haben eine untersch. Laenge
+  comb_int_use = merge(robot_int_ios,avatar_int_ios, by = &quot;row.names&quot;, all = T, suffixes = c(&quot;&quot;,&quot;&quot;))
+  comb_int_use$Row.names &lt;- NULL
+
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(comb_int_use, catcount = 3,  wrap.legend.labels = 10, 
+                c(rep(&quot;A: Einschaetzung Roboter&quot;, 1), rep(&quot;B: Einschaetzung Avatar&quot;, 1)),
+                geom.colors = c(&quot;#B34954&quot;,&quot;#FFFCA6&quot;,&quot;#5292B3&quot;),
+                rel_heights = c(6, 8))</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/IOS-1.png" width="672" /></p>
+<p><em>Auch hier könnten wir uns statistisch anschauen, ob die Kinder sich Robbie näher fühlten, wenn er als Roboter auftrat im Vergleich zum Avatar.</em></p>
+<p><strong>Was war Robbie für dich?</strong></p>
+<pre class="r"><code># reference: https://strengejacke.github.io/sjPlot/reference/plot_likert.html
+
+# Fuege Items zu Master-Table fuer Kinderbefragung hinzu
+  int_kind$Rolle_Robbie = ds_kind$B111
+  
+# Trenne nach Avatar / Roboter Gruppe
+  robot_int_kind = int_kind[int_kind$group == &quot;Roboter&quot;,]
+  avatar_int_kind = int_kind[int_kind$group == &quot;Avatar&quot;,]
+  
+# Waehle nur diese Items aus  
+  robot_int_kind = as_tibble(robot_int_kind)
+  robot_int_use = robot_int_kind %&gt;% dplyr::select(Rolle_Robbie)
+  
+  avatar_int_kind = as_tibble(avatar_int_kind)
+  avatar_int_use = avatar_int_kind %&gt;% dplyr::select(Rolle_Robbie)
+  
+# Kodiere Items um, definiere levels, faktorisiere und ordne sie
+  robot_int_use = data.frame(lapply(robot_int_use, factor, ordered=TRUE, 
+                          levels=1:6, 
+                          labels=c(&quot;Freund/in&quot;,&quot;Fremde/r&quot;,&quot;Verwandte/r&quot;,&quot;Tutor/in&quot;,
+                                   &quot;Elternteil&quot;,&quot;Lehrer/in&quot;)))
+  
+  avatar_int_use = data.frame(lapply(avatar_int_use, factor, ordered=TRUE, 
+                          levels=1:6, 
+                          labels=c(&quot;Freund/in&quot;,&quot;Fremde/r&quot;,&quot;Verwandte/r&quot;,&quot;Tutor/in&quot;,
+                                   &quot;Elternteil&quot;,&quot;Lehrer/in&quot;)))
+    
+# Kombiniere Daten von Roboter- und Avatar-Einschaetzung  
+  comb_int_use = merge(robot_int_use,avatar_int_use, by = &quot;row.names&quot;, all = T, suffixes = c(&quot;&quot;,&quot;&quot;))
+   comb_int_use$Row.names &lt;- NULL
+  
+# Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
+  plot_likert(comb_int_use, catcount = 6,  wrap.legend.labels = 10, 
+                c(rep(&quot;A: Einschaetzung Roboter&quot;, 1), rep(&quot;B: Einschaetzung Avatar&quot;, 1)),
+                geom.colors = c(&quot;#B34954&quot;,&quot;#FF828E&quot;,&quot;#FFFCA6&quot;,&quot;#69CDFF&quot;,&quot;#5292B3&quot;),
+                rel_heights = c(6, 8))</code></pre>
+<p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Rolle_Robbie-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="beziehungsqualität" class="section level3">
+<h3>Beziehungsqualität</h3>
+<p>Danach haben wir den Probanden weitere Fragen zu beziehungsbeinflussenden Variablen gestellt:</p>
 <p><strong>Einschätzung der Kinder</strong></p>
 <pre class="r"><code># reference: https://strengejacke.github.io/sjPlot/reference/plot_likert.html
 
@@ -796,11 +862,22 @@ summary(ds$TABLET_ROBOT)</code></pre>
                 geom.colors = c(&quot;#B34954&quot;,&quot;#FF828E&quot;,&quot;#FFFCA6&quot;,&quot;#69CDFF&quot;,&quot;#5292B3&quot;),
                 rel_heights = c(6, 8))</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Eltern_Usab_Bez_Fragen-1.png" width="672" /></p>
+<p><em>Diese Variablen würde ich nur deskriptiv verwenden und keine weitere statistische Analyse rechnen. Sie helfen uns vorrangig, unsere Roboter-Kind-Interaktion zu verbessern.</em></p>
 <p><br></p>
 </div>
 </div>
-<div id="einschätzung-spiel" class="section level3">
-<h3>Einschätzung Spiel</h3>
+<div id="einschätzung-spiel" class="section level2">
+<h2>Einschätzung Spiel</h2>
+<p>Zur Einschätzung des Smove Spiels haben wir den <strong>Kids Game Experience Questionnaire (KidsGEQ)</strong> benutzt und die Subskalen</p>
+<ul>
+<li>Spannung</li>
+<li>Positiver / Negativer Affekt</li>
+<li>Kompetenz</li>
+<li>Immersion</li>
+<li>Herausforderung und</li>
+<li>Flow-Erleben</li>
+</ul>
+<p>eingesetzt. Die <strong>Abbildungen A</strong> zeigen jeweils die einzelnen Items; die <strong>Abbildungen B</strong> die Zusammenfassung in den Subskalen.</p>
 <pre class="r"><code># Extrahiere KidsGEQ Items  
   int_kind$KGEQ01 = ds_kind$K102_01
   int_kind$KGEQ02 = ds_kind$K102_02
@@ -949,7 +1026,7 @@ int_kind_geq_dim_graph = int_kind_geq_dim_graph %&gt;%
   
   }</code></pre>
 <p><strong>Eltern-Einschätzung zum Spiel, welches ihr Kind entweder mit dem Roboter oder Avatar gespielt hat:</strong></p>
-<pre class="r"><code>## F?r Visualisierung   
+<pre class="r"><code>## Fuer Visualisierung   
   
   robot_int_eltern = int_eltern[int_eltern$group == &quot;Roboter&quot;,]
   avatar_int_eltern = int_eltern[int_eltern$group == &quot;Avatar&quot;,]
@@ -1026,7 +1103,10 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
                                labels = c(&quot;A&quot;, &quot;B&quot;),
                                caption.color = &quot;black&quot;)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Eltern_Int_KidsGEQ_Visualisierung-1.png" width="672" /></p>
-<p><strong>Hattest du generell das Gefühl, dass das Spiel deine Aufregung steigert, also dich nervös macht, oder etwas stresst?</strong></p>
+<p><em>Diese Variablen würde ich ebenfalls nur deskriptiv verwenden und keine weitere statistische Analyse rechnen. Sie helfen uns vorrangig, das Smove Spiel zu verbessern.</em></p>
+<p><br></p>
+<p><strong>Hattest du generell das Gefühl, dass das Spiel deine Aufregung steigert, also dich nervös macht, oder etwas stresst?</strong> <br></p>
+<p><em>Nur als deskriptive Variable verwenden.</em></p>
 <pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
   int_kind$spielstress = ds_kind$QF01
 
@@ -1042,25 +1122,35 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
 # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_qual1, catcount = 3)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/spielstress-1.png" width="672" /></p>
-<p><strong>Zeig mal, wie sehr warst du beim Spielen aufgeregt?</strong></p>
+<p><br></p>
+<p><strong>Zeig mal, wie sehr warst du beim Spielen aufgeregt?</strong> <br></p>
+<p>An dieser Stelle wurde wieder der Affective Slider für die Messung des Arousals verwendet.</p>
+<p><em>Hier könnte man wieder einen statistischen Vergleich zwischen Avatar- und Roboter-Gruppe machen.</em></p>
 <pre class="r"><code>  ## Aufregung beim gesamten Spiel (Variable QF_02)
-  round(mean(ds_kind$QF02_01,na.rm = TRUE),2)</code></pre>
-<pre><code>## [1] 62.25</code></pre>
+
+  int_kind$aufr_spiel = ds_kind$QF02_01
+
+  round(mean(int_kind$aufr_spiel,na.rm = TRUE),2)</code></pre>
+<pre><code>## [1] 49.83</code></pre>
+<p><br></p>
 <p><strong>Begründe deine Antwort: Was war vor allem aufregend, was nicht?</strong></p>
 <ul>
-<li>Qualitative Antworten ergänzen</li>
-<li>Qualitative Antworten ergänzen</li>
+<li><em>Qualitative Antworten ergänzen</em></li>
+<li><em>Qualitative Antworten ergänzen</em></li>
 </ul>
+<p><br></p>
 <p><strong>Wie könnte man Spiel noch aufregender machen?</strong></p>
 <ul>
-<li>Qualitative Antworten ergänzen</li>
-<li>Qualitative Antworten ergänzen</li>
+<li><em>Qualitative Antworten ergänzen</em></li>
+<li><em>Qualitative Antworten ergänzen</em></li>
 </ul>
+<p><br></p>
 </div>
-<div id="einschätzung-atemübung" class="section level3">
-<h3>Einschätzung Atemübung</h3>
+<div id="einschätzung-atemübung" class="section level2">
+<h2>Einschätzung Atemübung</h2>
 <p><br></p>
 <p><strong>Ich habe bei der Atemübung gut mitgemacht.</strong></p>
+<p><em>Nur als deskriptive Variable verwenden.</em></p>
 <pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
   int_kind$adh_ueb = ds_kind$QF05
 
@@ -1076,7 +1166,9 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
 # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_adh_ueb, catcount = 5)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/adherenz_uebung-1.png" width="672" /></p>
+<p><br></p>
 <p><strong>Wie hast du dich nach den Übungen gefühlt?</strong></p>
+<p>Einschätzung der Kinder</p>
 <pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
   int_kind$gef_nach_ue= ds_kind$QF06
 
@@ -1092,9 +1184,14 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
 # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_gef_nach_ue, catcount = 3)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/gefuehl_nach_uebung_kinder-1.png" width="672" /></p>
+<p><br></p>
+<p>Einschätzung der Eltern</p>
+<p><em>Hier würde ich auf jeden Fall eine Statistik einbauen. Die Frage wäre: Nimmt das Arousal signifikant zwischen Ende des Spiels und Ende der Atemübung ab? Wird dies moduliert durch Avatar vs Roboter? Man könnte an dieser Stelle auch die Variablen aus dem Screening einbauen: Also zum Beispiel profitieren Kinder, die eine höhere trait-Emotionsregulation haben, mehr von der Übung? Oder auch die anderen Variablen der Sozialen Reaktivität und trait-compliance einbeziehen.</em></p>
+<p>Unterschied von Valenz und Arousal nach dem Spiel vs nach der Entspannug (A) und elterliche Einschätzung der Adherenz des Kindes (B)</p>
 <pre class="r"><code>  ## Differenzscores berechnen
   # Neues Dataset erstellen
-  diffscores &lt;- ds_uebung[, .(EXC_NR,FG01_01, FG02_01,FG03_01,FG04_01, PID)]
+  # FG05_01 = Adherenz der Kinder durch Eltern eingeschaetzt
+  diffscores &lt;- ds_uebung[, .(EXC_NR,FG01_01, FG02_01,FG03_01,FG04_01,FG05_01, PID)]
 
   #  Gefuehl nach dem Spiel (Variable FG01_01) und nach der Atemübung (Variable FG02_01)
   diffscores[,DIFF_VAL := ds_uebung[,.(FG01_01-FG02_01)]]
@@ -1102,15 +1199,15 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
   # Arousal nach dem Spiel (Variable FG03_01) und nach der Atemübung (Variable FG04_01)
   diffscores[,DIFF_ARO :=ds_uebung[,.(FG03_01-FG04_01)]]
   
-  ## Mittelwerte der DIfferenzscores berechnen
+  ## Mittelwerte der Differenzscores berechnen
   diffscores[,.(Mittelwert_Differenzscore_Valenz = round(mean(DIFF_VAL,na.rm = TRUE),2), Mittelwert_Differenzscore_Arousal = round(mean(DIFF_ARO,na.rm = TRUE),2)), keyby = EXC_NR]</code></pre>
 <pre><code>##    EXC_NR Mittelwert_Differenzscore_Valenz Mittelwert_Differenzscore_Arousal
-## 1:      1                               26                               -50
-## 2:      2                               -5                                39
-## 3:      3                              -42                                39
-## 4:      4                              -25                                39
-## 5:      5                              -36                                57
-## 6:      6                              -35                                32</code></pre>
+## 1:      1                             3.83                             12.67
+## 2:      2                             3.00                             39.83
+## 3:      3                            15.83                             27.83
+## 4:      4                             9.00                             31.00
+## 5:      5                            -5.00                             12.00
+## 6:      6                            -1.00                              0.33</code></pre>
 <pre class="r"><code>  ## Visualisierung Differenzscores pro Uebung
   # Daten fuer ggplot ins Long-format bringen
   diffscores_long &lt;- melt(diffscores,id.vars= c(&quot;EXC_NR&quot;, &quot;PID&quot;), measure.vars=c(&quot;DIFF_VAL&quot;, &quot;DIFF_ARO&quot;))
@@ -1119,16 +1216,41 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
   summary &lt;- summarySE(diffscores_long, measurevar= &quot;value&quot; , groupvars= c(&quot;variable&quot;,&quot;EXC_NR&quot;),na.rm = TRUE)
   
   # plotten
-  ggplot(data = summary, aes(x = EXC_NR, y = value, col= variable, ymin = value + sd, ymax = value - sd)) + 
+  arous_val = ggplot(data = summary, aes(x = EXC_NR, y = value, col= variable, ymin = value + sd, ymax = value - sd)) + 
       geom_pointrange(position = position_dodge(0.5)) +
-      labs( title = &quot;Mittelwerte&quot;, x = &quot;Uebung&quot;, y = &quot;Differenz&quot;) +
+      labs( title = &quot;Mittelwerte&quot;, x = &quot;Uebungsrunde&quot;, y = &quot;Differenz&quot;) +
       scale_x_discrete(breaks = 1:6, labels = 1:6, limits = 1:6) +
       scale_color_discrete (labels = c(&quot;Differenz Valenz&quot;, &quot;Differenz Arousal&quot;)) +
       #scale_y_continuous(breaks =) + kann spaeter angepasst werden
       theme_bw() +
-      theme(legend.title = element_blank())</code></pre>
+      theme(legend.title = element_blank(), legend.position=&quot;bottom&quot;)
+  
+  
+## Visualisierung Adherenz pro Uebungsrunde
+  # Daten fuer ggplot ins Long-format bringen
+  adherence_long &lt;- melt(diffscores,id.vars= c(&quot;EXC_NR&quot;, &quot;PID&quot;), measure.vars=c(&quot;FG05_01&quot;))
+  
+  # Summary mit Daten fuer den Plot erstellen
+  summary &lt;- summarySE(adherence_long, measurevar= &quot;value&quot; , groupvars= c(&quot;variable&quot;,&quot;EXC_NR&quot;),na.rm = TRUE)
+  
+  # plotten
+ adh = ggplot(data = summary, aes(x = EXC_NR, y = value, ymin = value + sd, ymax = value - sd)) + 
+      geom_pointrange(position = position_dodge(0.5)) +
+      labs( title = &quot;Mittelwerte&quot;, x = &quot;Uebungsrunde&quot;, y = &quot;Adherenz&quot;) +
+      scale_x_discrete(breaks = 1:6, labels = 1:6, limits = 1:6) +
+      #scale_y_continuous(breaks =) + kann spaeter angepasst werden
+      theme_bw() +
+      theme(legend.title = element_blank())
+  
+  
+  combine_plots(arous_val, adh,
+                               ncol = 2, nrow = 1,
+                               labels = c(&quot;A&quot;, &quot;B&quot;),
+                               caption.color = &quot;black&quot;)  </code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/effekt_uebung_eltern_visualisierung-1.png" width="672" /></p>
-<p><strong>Hattest du das Gefühl, dass Robbie dich beim Entspannen gut unterstützt hat?</strong></p>
+<p><br></p>
+<p><strong>Hattest du das Gefühl, dass Robbie dich beim Entspannen gut unterstützt hat?</strong> <br></p>
+<p><em>Nur als deskriptive Variable verwenden.</em></p>
 <pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
   int_kind$wirk_Robbie = ds_kind$QF07
 
@@ -1145,12 +1267,15 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
   # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_wirk_Robbie, catcount = 3)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/Robbie_Entspannung_unterstuetzt-1.png" width="672" /></p>
+<p><br></p>
 <p><strong>Wenn ja, was hat dir vor allem geholfen? Bzw. wenn nein, was hat dir gefehlt, oder was könnte Robbie besser machen?</strong></p>
 <ul>
-<li>Qualitative Antworten ergänzen</li>
-<li>Qualitative Antworten ergänzen</li>
+<li><em>Qualitative Antworten ergänzen</em></li>
+<li><em>Qualitative Antworten ergänzen</em></li>
 </ul>
-<p><strong>Ich würde die Atemübung gern wieder machen.</strong></p>
+<p><br></p>
+<p><strong>Ich würde die Atemübung gern wieder machen.</strong> <br></p>
+<p><em>Nur als deskriptive Variable verwenden.</em></p>
 <pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
   int_kind$ueb_wied = ds_kind$QF09
 
@@ -1166,7 +1291,9 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
 # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_ueb_wied, catcount = 5)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/uebung_wiederholen-1.png" width="672" /></p>
+<p><br></p>
 <p><strong>Könntest du dir vorstellen, dass du im Alltag diese Atemübung ohne Robbie machst, wenn du sehr aufgeregt bist und dich beruhigen möchtest?</strong></p>
+<p><em>Nur als deskriptive Variable verwenden.</em></p>
 <pre class="r"><code># Fuege Items zu Master-Table fuer Kinderbefragung hinzu
   int_kind$ueb_alltag = ds_kind$QF10
 
@@ -1183,11 +1310,25 @@ int_eltern_geq_dim_graph = int_eltern_geq_dim_graph %&gt;%
   # Plotte Likert-Skala fuer Items getrennt nach Roboter- und Avatar-Gruppe
   plot_likert(int_kind_ueb_alltag, catcount = 3)</code></pre>
 <p><img src="Eltern_Kind_Befragung_Roboter_Interaktion_files/figure-html/uebung_alltag-1.png" width="672" /></p>
+<p><br></p>
 <p><strong>Was machst du, wenn du dich entspannen möchtest? Vielleicht kennst du eine gute Entspannungsübung, die Robbie mit Kinder machen könnte?</strong></p>
 <ul>
-<li>Qualitative Antworten ergänzen</li>
-<li>Qualitative Antworten ergänzen</li>
+<li><em>Qualitative Antworten ergänzen</em></li>
+<li><em>Qualitative Antworten ergänzen</em></li>
 </ul>
+</div>
+<div id="rds-speicherung" class="section level2">
+<h2>RDS-Speicherung</h2>
+<p>Zuletzt speichern wir die Datensets</p>
+<ul>
+<li>int_eltern (Infos des Kinderfragebogens)</li>
+<li>int_kind (Infos des Elternfragebogens)</li>
+<li>diffscores_long (Differenzwerte aus der elterlichen Einschätzung der kindlichen Aufregung während nach dem Smove Spiel und nach der Entspannungsübung)</li>
+</ul>
+<p>als RDs files, um sie für weitere Analysen zu verwenden.</p>
+<pre class="r"><code>  saveRDS(int_eltern,&quot;Variablen_Kinder&quot;)
+  saveRDS(int_kind,&quot;Variablen_Eltern&quot;)
+  saveRDS(diffscores_long, &quot;Differenzwerte_Eltern_Aufregund_Kind&quot;)</code></pre>
 </div>
 
 
