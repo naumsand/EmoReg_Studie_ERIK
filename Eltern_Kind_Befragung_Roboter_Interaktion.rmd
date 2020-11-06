@@ -959,8 +959,8 @@ Unterschied von Valenz und Arousal nach dem Spiel vs nach der Entspannug (A) und
 ```{r effekt_uebung_eltern}
   ## Differenzscores berechnen
   # Neues Dataset erstellen
-  # FG05_01 = Adherenz der Kinder durch Eltern eingeschaetzt
-  diffscores <- ds_uebung[, .(EXC_NR,FG01_01, FG02_01,FG03_01,FG04_01,FG05_01, PID)]
+  # FG05 = Adherenz der Kinder durch Eltern eingeschaetzt
+  diffscores <- ds_uebung[, .(EXC_NR,FG01_01, FG02_01,FG03_01,FG04_01,FG05, PID)]
 
   #  Gefuehl nach dem Spiel (Variable FG01_01) und nach der Atemübung (Variable FG02_01)
   diffscores[,DIFF_VAL := ds_uebung[,.(FG01_01-FG02_01)]]
@@ -993,7 +993,7 @@ Unterschied von Valenz und Arousal nach dem Spiel vs nach der Entspannug (A) und
   
 ## Visualisierung Adherenz pro Uebungsrunde
   # Daten fuer ggplot ins Long-format bringen
-  adherence_long <- melt(diffscores,id.vars= c("EXC_NR", "PID"), measure.vars=c("FG05_01"))
+  adherence_long <- melt(diffscores,id.vars= c("EXC_NR", "PID"), measure.vars=c("FG05"))
   
   # Summary mit Daten fuer den Plot erstellen
   summary <- summarySE(adherence_long, measurevar= "value" , groupvars= c("variable","EXC_NR"),na.rm = TRUE)
