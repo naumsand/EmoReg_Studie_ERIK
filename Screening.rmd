@@ -176,15 +176,15 @@ Die Subskalen der Skala Gutmütigkeit sind:
   
   ## Summenwerte pro Facette berechnen und dem Dataframe "traits" hinzufuegen
   # 1. Altruismus/Altruism (B_ALT) (8 Items)
-  traits[,HiPic_B_ALT := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)=='HP01_01'):which(names(Hipic_Facetkey)=='HP01_08'))])]
+  traits[,HiPic_B_ALT := rowSums(Hipic_Facetkey[,which(names(Hipic_Facetkey)=='HP01_01'):which(names(Hipic_Facetkey)=='HP01_08')])]
   # 2. Entgegenkommen/Compliance (B_COM) (8 Items)
-  traits[,HiPic_B_COM := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)=='HP01_09'):which(names(Hipic_Facetkey)=='HP01_16'))])]
+  traits[,HiPic_B_COM := rowSums(Hipic_Facetkey[,which(names(Hipic_Facetkey)=='HP01_09'):which(names(Hipic_Facetkey)=='HP01_16')])]
   # 3. Dominanz/Dominance (B_DOM) (8 Items)
-  traits[,HiPic_B_DOM := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)=='HP01_17'):which(names(Hipic_Facetkey)=='HP01_24'))])]
+  traits[,HiPic_B_DOM := rowSums(Hipic_Facetkey[,which(names(Hipic_Facetkey)=='HP01_17'):which(names(Hipic_Facetkey)=='HP01_24')])]
   # 4. Egozentrismus/Egocentrism (B_EGO) (8 Items)
-  traits[,HiPic_B_EGO := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)=='HP01_25'):which(names(Hipic_Facetkey)=='HP01_32'))])]
+  traits[,HiPic_B_EGO := rowSums(Hipic_Facetkey[,which(names(Hipic_Facetkey)=='HP01_25'):which(names(Hipic_Facetkey)=='HP01_32')])]
   # 5. Reizbarkeit/Irritability (B_IRR) (8 Items)
-  traits[,HiPic_B_IRR := rowSums(Hipic_Facetkey[,(which(names(Hipic_Facetkey)=='HP01_33'):which(names(Hipic_Facetkey)=='HP01_40'))])]
+  traits[,HiPic_B_IRR := rowSums(Hipic_Facetkey[,which(names(Hipic_Facetkey)=='HP01_33'):which(names(Hipic_Facetkey)=='HP01_40')])]
 ```
 
 ```{r HiPic_Gesamt}
