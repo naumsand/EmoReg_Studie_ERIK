@@ -112,7 +112,7 @@ Achtung: Das Umwandeln der Daten ins Wide-format setzt voraus, dass jede ID gena
     if(nrow(p)!=4) {next} # Kontrolle: 4 Filmfrageboegen pro ID?
     p <- p[order(p$IV02_02),] # Kontrolle: Filme in der richtigen Reihenfolge?
     # Neue Variable "FILM" erstellen und p hinzufuegen
-    p['FILM'] <- unlist(rflg)
+    p$FILM <- unlist(rflg)
     # p pro ID zusammenfuegen
     all <- rbind(all, p)}
 ```
